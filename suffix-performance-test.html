@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suffix Formatting Performance Test</title>
+    <style>
+        body { font-family: monospace; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .result { margin: 10px 0; }
+        .fastest { color: green; font-weight: bold; }
+        .slowest { color: red; }
+        table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f5f5f5; }
+    </style>
+</head>
+<body>
+    <h1>Suffix Formatting Performance Test</h1>
+    <div id="results"></div>
+
+    <script>
+        // Test data - various number ranges
+        const testNumbers = [
+            1e6, 5e6, 9.99e6,           // Millions
+            1e9, 2.5e9, 7.89e9,         // Billions  
+            1e12, 3.14e12, 8.88e12,     // Trillions
+            1e15, 1e18, 1e21, 1e24,     // Larger
+            1e30, 1e60, 1e90, 1e120,    // Very large
+            1e150, 1e200, 1e250, 1e300  // Extremely large
+        ];
+
+        // Suffix data (ordered largest to smallest)
+        const suffixes = [
+            { value: 1e303, suffix: 'Ce' }, { value: 1e300, suffix: 'NoNg' }, { value: 1e297, suffix: 'OcNg' },
+            { value: 1e294, suffix: 'SpNg' }, { value: 1e291, suffix: 'SxNg' }, { value: 1e288, suffix: 'QiNg' },
+            { value: 1e285, suffix: 'QaNg' }, { value: 1e282, suffix: 'TNg' }, { value: 1e279, suffix: 'DNg' },
+            { value: 1e276, suffix: 'UNg' }, { value: 1e273, suffix: 'Ng' }, { value: 1e270, suffix: 'NoOg' },
+            { value: 1e267, suffix: 'OcOg' }, { value: 1e264, suffix: 'SpOg' }, { value: 1e261, suffix: 'SxOg' },
+            { value: 1e258, suffix: 'QiOg' }, { value: 1e255, suffix: 'QaOg' }, { value: 1e252, suffix: 'TOg' },
+            { value: 1e249, suffix: 'DOg' }, { value: 1e246, suffix: 'UOg' }, { value: 1e243, suffix: 'Og' },
+            { value: 1e240, suffix: 'NoSp' }, { value: 1e237, suffix: 'OcSp' }, { value: 1e234, suffix: 'SpSp' },
+            { value: 1e231, suffix: 'SxSp' }, { value: 1e228, suffix: 'QiSp' }, { value: 1e225, suffix: 'QaSp' },
+            { value: 1e222, suffix: 'TSp' }, { value: 1e219, suffix: 'DSp' }, { value: 1e216, suffix: 'USp' },
+            { value: 1e213, suffix: 'Sp' }, { value: 1e210, suffix: 'NoSx' }, { value: 1e207, suffix: 'OcSx' },
+            { value: 1e204, suffix: 'SpSx' }, { value: 1e201, suffix: 'SxSx' }, { value: 1e198, suffix: 'QiSx' },
+            { value: 1e195, suffix: 'QaSx' }, { value: 1e192, suffix: 'TSx' }, { value: 1e189, suffix: 'DSx' },
+            { value: 1e186, suffix: 'USx' }, { value: 1e183, suffix: 'Sx' }, { value: 1e180, suffix: 'NoQiq' },
+            { value: 1e177, suffix: 'OcQiq' }, { value: 1e174, suffix: 'SpQiq' }, { value: 1e171, suffix: 'SxQiq' },
+            { value: 1e168, suffix: 'QiQiq' }, { value: 1e165, suffix: 'QaQiq' }, { value: 1e162, suffix: 'TQiq' },
+            { value: 1e159, suffix: 'DQiq' }, { value: 1e156, suffix: 'UQiq' }, { value: 1e153, suffix: 'Qiq' },
+            { value: 1e150, suffix: 'NoQag' }, { value: 1e147, suffix: 'OcQag' }, { value: 1e144, suffix: 'SpQag' },
+            { value: 1e141, suffix: 'SxQag' }, { value: 1e138, suffix: 'QiQag' }, { value: 1e135, suffix: 'QaQag' },
+            { value: 1e132, suffix: 'TQag' }, { value: 1e129, suffix: 'DQag' }, { value: 1e126, suffix: 'UQag' },
+            { value: 1e123, suffix: 'Qag' }, { value: 1e120, suffix: 'NoTg' }, { value: 1e117, suffix: 'OcTg' },
+            { value: 1e114, suffix: 'SpTg' }, { value: 1e111, suffix: 'SxTg' }, { value: 1e108, suffix: 'QiTg' },
+            { value: 1e105, suffix: 'QaTg' }, { value: 1e102, suffix: 'TTg' }, { value: 1e99, suffix: 'DTg' },
+            { value: 1e96, suffix: 'UTg' }, { value: 1e93, suffix: 'Tg' }, { value: 1e90, suffix: 'NoVg' },
+            { value: 1e87, suffix: 'OcVg' }, { value: 1e84, suffix: 'SpVg' }, { value: 1e81, suffix: 'SxVg' },
+            { value: 1e78, suffix: 'QiVg' }, { value: 1e75, suffix: 'QaVg' }, { value: 1e72, suffix: 'TVg' },
+            { value: 1e69, suffix: 'DVg' }, { value: 1e66, suffix: 'UVg' }, { value: 1e63, suffix: 'Vg' },
+            { value: 1e60, suffix: 'NoDc' }, { value: 1e57, suffix: 'OcDc' }, { value: 1e54, suffix: 'SpDc' },
+            { value: 1e51, suffix: 'SxDc' }, { value: 1e48, suffix: 'QiDc' }, { value: 1e45, suffix: 'QaDc' },
+            { value: 1e42, suffix: 'TDc' }, { value: 1e39, suffix: 'DDc' }, { value: 1e36, suffix: 'UDc' },
+            { value: 1e33, suffix: 'Dc' }, { value: 1e30, suffix: 'No' }, { value: 1e27, suffix: 'Oc' },
+            { value: 1e24, suffix: 'Sp' }, { value: 1e21, suffix: 'Sx' }, { value: 1e18, suffix: 'Qi' },
+            { value: 1e15, suffix: 'Qa' }, { value: 1e12, suffix: 'T' }, { value: 1e9, suffix: 'B' },
+            { value: 1e6, suffix: 'M' }
+        ];
+
+        // Approach 1: Linear search (current approach)
+        function formatWithSuffix_Linear(value, precision = 2) {
+            for (const { value: threshold, suffix } of suffixes) {
+                if (value >= threshold) {
+                    const scaledValue = value / threshold;
+                    return scaledValue.toFixed(precision) + suffix;
+                }
+            }
+            return value.toString();
+        }
+
+        // Approach 2: Binary search
+        function formatWithSuffix_Binary(value, precision = 2) {
+            let left = 0;
+            let right = suffixes.length - 1;
+            let bestMatch = -1;
+
+            while (left <= right) {
+                const mid = Math.floor((left + right) / 2);
+                if (value >= suffixes[mid].value) {
+                    bestMatch = mid;
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+
+            if (bestMatch !== -1) {
+                const { value: threshold, suffix } = suffixes[bestMatch];
+                const scaledValue = value / threshold;
+                return scaledValue.toFixed(precision) + suffix;
+            }
+            return value.toString();
+        }
+
+        // Approach 3: Math.log10 based calculation
+        function formatWithSuffix_Log(value, precision = 2) {
+            if (value < 1e6) return value.toString();
+            
+            const exponent = Math.floor(Math.log10(value));
+            const suffixIndex = Math.floor((exponent - 6) / 3);
+            
+            // Map to our suffix array (reverse order)
+            const actualIndex = suffixes.length - 1 - Math.min(suffixIndex, suffixes.length - 1);
+            
+            if (actualIndex >= 0 && actualIndex < suffixes.length) {
+                const { value: threshold, suffix } = suffixes[actualIndex];
+                if (value >= threshold) {
+                    const scaledValue = value / threshold;
+                    return scaledValue.toFixed(precision) + suffix;
+                }
+            }
+            
+            // Fallback to linear search
+            return formatWithSuffix_Linear(value, precision);
+        }
+
+        // Approach 4: Lookup table for common ranges
+        const lookupTable = new Map();
+        for (let i = 6; i <= 303; i += 3) {
+            const threshold = Math.pow(10, i);
+            const suffix = suffixes.find(s => s.value === threshold);
+            if (suffix) {
+                lookupTable.set(i, suffix);
+            }
+        }
+
+        function formatWithSuffix_Lookup(value, precision = 2) {
+            if (value < 1e6) return value.toString();
+            
+            const exponent = Math.floor(Math.log10(value));
+            const roundedExp = Math.floor(exponent / 3) * 3;
+            
+            const suffix = lookupTable.get(roundedExp);
+            if (suffix && value >= suffix.value) {
+                const scaledValue = value / suffix.value;
+                return scaledValue.toFixed(precision) + suffix.suffix;
+            }
+            
+            // Fallback to linear search
+            return formatWithSuffix_Linear(value, precision);
+        }
+
+        // Approach 5: Early exit optimization
+        function formatWithSuffix_EarlyExit(value, precision = 2) {
+            // Quick checks for most common cases
+            if (value < 1e6) return value.toString();
+            if (value < 1e9) return (value / 1e6).toFixed(precision) + 'M';
+            if (value < 1e12) return (value / 1e9).toFixed(precision) + 'B';
+            if (value < 1e15) return (value / 1e12).toFixed(precision) + 'T';
+            
+            // For larger numbers, use linear search
+            for (const { value: threshold, suffix } of suffixes) {
+                if (value >= threshold) {
+                    const scaledValue = value / threshold;
+                    return scaledValue.toFixed(precision) + suffix;
+                }
+            }
+            return value.toString();
+        }
+
+        // Performance testing function
+        function runPerformanceTest(testName, formatFunction, iterations = 100000) {
+            const start = performance.now();
+            
+            for (let i = 0; i < iterations; i++) {
+                for (const num of testNumbers) {
+                    formatFunction(num);
+                }
+            }
+            
+            const end = performance.now();
+            const duration = end - start;
+            
+            return {
+                name: testName,
+                duration: duration,
+                opsPerSecond: Math.round((iterations * testNumbers.length) / (duration / 1000))
+            };
+        }
+
+        // Correctness testing
+        function testCorrectness() {
+            const results = [];
+            const approaches = [
+                { name: 'Linear', func: formatWithSuffix_Linear },
+                { name: 'Binary', func: formatWithSuffix_Binary },
+                { name: 'Log', func: formatWithSuffix_Log },
+                { name: 'Lookup', func: formatWithSuffix_Lookup },
+                { name: 'EarlyExit', func: formatWithSuffix_EarlyExit }
+            ];
+
+            for (const num of testNumbers) {
+                const row = { number: num.toExponential(2) };
+                for (const approach of approaches) {
+                    row[approach.name] = approach.func(num);
+                }
+                results.push(row);
+            }
+            
+            return results;
+        }
+
+        // Run all tests
+        function runAllTests() {
+            const resultsDiv = document.getElementById('results');
+            
+            // Correctness test
+            resultsDiv.innerHTML += '<div class="test-section"><h2>Correctness Test</h2>';
+            const correctnessResults = testCorrectness();
+            
+            let table = '<table><tr><th>Number</th><th>Linear</th><th>Binary</th><th>Log</th><th>Lookup</th><th>EarlyExit</th></tr>';
+            for (const row of correctnessResults) {
+                table += `<tr><td>${row.number}</td><td>${row.Linear}</td><td>${row.Binary}</td><td>${row.Log}</td><td>${row.Lookup}</td><td>${row.EarlyExit}</td></tr>`;
+            }
+            table += '</table></div>';
+            resultsDiv.innerHTML += table;
+
+            // Performance test
+            resultsDiv.innerHTML += '<div class="test-section"><h2>Performance Test</h2>';
+            
+            const performanceResults = [
+                runPerformanceTest('Linear Search', formatWithSuffix_Linear),
+                runPerformanceTest('Binary Search', formatWithSuffix_Binary),
+                runPerformanceTest('Log Calculation', formatWithSuffix_Log),
+                runPerformanceTest('Lookup Table', formatWithSuffix_Lookup),
+                runPerformanceTest('Early Exit', formatWithSuffix_EarlyExit)
+            ];
+
+            // Sort by performance
+            performanceResults.sort((a, b) => a.duration - b.duration);
+            
+            let perfTable = '<table><tr><th>Approach</th><th>Duration (ms)</th><th>Ops/Second</th><th>Relative Speed</th></tr>';
+            const fastest = performanceResults[0].duration;
+            
+            for (let i = 0; i < performanceResults.length; i++) {
+                const result = performanceResults[i];
+                const relativeSpeed = (fastest / result.duration).toFixed(2) + 'x';
+                const cssClass = i === 0 ? 'fastest' : (i === performanceResults.length - 1 ? 'slowest' : '');
+                
+                perfTable += `<tr class="${cssClass}">
+                    <td>${result.name}</td>
+                    <td>${result.duration.toFixed(2)}</td>
+                    <td>${result.opsPerSecond.toLocaleString()}</td>
+                    <td>${relativeSpeed}</td>
+                </tr>`;
+            }
+            perfTable += '</table></div>';
+            resultsDiv.innerHTML += perfTable;
+
+            // Analysis
+            resultsDiv.innerHTML += `<div class="test-section">
+                <h2>Analysis</h2>
+                <p><strong>Fastest approach:</strong> ${performanceResults[0].name}</p>
+                <p><strong>Slowest approach:</strong> ${performanceResults[performanceResults.length - 1].name}</p>
+                <p><strong>Speed improvement:</strong> ${(performanceResults[performanceResults.length - 1].duration / performanceResults[0].duration).toFixed(2)}x faster</p>
+                <p><strong>Recommendation:</strong> Use the ${performanceResults[0].name} approach for optimal performance.</p>
+            </div>`;
+        }
+
+        // Run tests when page loads
+        window.addEventListener('load', runAllTests);
+    </script>
+</body>
+</html> 

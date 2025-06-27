@@ -1,0 +1,18 @@
+{
+  "name": "coin-flip-idle",
+  "version": "1.0.0",
+  "description": "A captivating idle game centered around flipping coins with three outcomes: Heads, Tails, and rare Edge landings",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "start-python": "python -m http.server 8000",
+    "start-node": "npx http-server -p 8000",
+    "dev": "python3 -m http.server 8000"
+  },
+  "keywords": ["idle", "clicker", "game", "coin", "flip", "incremental"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+} 

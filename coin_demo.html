@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlippableCoin Class Demo</title>
+    <style>
+        /* Basic page styling for the demo */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #1a202c;
+            color: #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Container for the demonstration */
+        .demo-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .coin-instance {
+            text-align: center;
+        }
+        
+        h1, h2 {
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        p {
+            color: #a0aec0;
+        }
+
+        /* Control panel for the demo */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background-color: #2d3748;
+            border-radius: 12px;
+        }
+
+        .controls button {
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #4a5568;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .controls button:hover {
+            background-color: #718096;
+        }
+
+        .controls button:disabled {
+            background-color: #2d3748;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* Styles for the Coin Class itself */
+        .coin-container {
+            perspective: 1000px;
+            width: 120px;
+            height: 120px;
+        }
+
+        .coin {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .coin .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-sizing: border-box;
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .coin .tails {
+            transform: rotateY(180deg);
+            font-size: 24px;
+        }
+
+        .coin .edge {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform: rotateY(90deg) translateZ(0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .coin .edge-surface {
+            position: absolute;
+            width: 16px; /* Coin thickness */
+            height: 120px;
+            transform: translateX(-8px); /* Center the edge */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>FlippableCoin Class Demo</h1>
+    <p>This shows how to use the generalized JavaScript class to create coins with custom colors.</p>
+
+    <div class="demo-container">
+        <div class="coin-instance">
+            <h2>Gold</h2>
+            <div id="gold-coin-container"></div>
+        </div>
+        <div class="coin-instance">
+            <h2>Emerald</h2>
+            <div id="emerald-coin-container"></div>
+        </div>
+        <div class="coin-instance">
+            <h2>Ruby</h2>
+            <div id="ruby-coin-container"></div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <p>Click to flip all coins to a random outcome.</p>
+        <button id="flip-button">Flip Coins</button>
+    </div>
+
+
+    <script>
+        /*******************************************************************
+         *
+         * FlippableCoin CLASS
+         * You can copy and paste this class into your game project.
+         *
+         *******************************************************************/
+        class FlippableCoin {
+            /**
+             * Creates an instance of a flippable coin.
+             * @param {object} config - The configuration object.
+             * @param {HTMLElement} config.containerElement - The HTML element to render the coin into.
+             * @param {object} config.colors - The colors for the coin.
+             * @param {string} config.colors.primary - The primary face color (hex).
+             * @param {string} config.colors.shadow - The shadow/edge color (hex).
+             * @param {string} [config.initialOutcome='heads'] - The starting outcome ('heads', 'tails', or 'edge').
+             */
+            constructor(config) {
+                if (!config.containerElement || !config.colors || !config.colors.primary || !config.colors.shadow) {
+                    throw new Error('FlippableCoin requires containerElement and colors { primary, shadow }.');
+                }
+
+                this.containerElement = config.containerElement;
+                this.colors = config.colors;
+                this.isFlipping = false;
+                this.outcome = config.initialOutcome || 'heads';
+
+                // To hold the DOM element that will be animated
+                this.coinEl = null;
+
+                // Create the HTML structure and apply initial state
+                this._createCoinHTML();
+                this._setRotation(false); // Set initial position without animation
+            }
+            
+            /**
+             * Creates the necessary DOM structure for the coin.
+             * @private
+             */
+            _createCoinHTML() {
+                // Clear any existing content in the container
+                this.containerElement.innerHTML = '';
+                
+                // Main container with perspective
+                const container = document.createElement('div');
+                container.className = 'coin-container';
+                
+                // The coin element that rotates
+                this.coinEl = document.createElement('div');
+                this.coinEl.className = 'coin';
+
+                // Heads Face
+                const headsFace = document.createElement('div');
+                headsFace.className = 'face heads';
+                headsFace.textContent = 'H';
+                headsFace.style.backgroundColor = this.colors.primary;
+                headsFace.style.border = `8px solid ${this.colors.shadow}`;
+
+                // Tails Face
+                const tailsFace = document.createElement('div');
+                tailsFace.className = 'face tails';
+                tailsFace.textContent = 'T';
+                tailsFace.style.backgroundColor = this.colors.primary;
+                tailsFace.style.border = `8px solid ${this.colors.shadow}`;
+                
+                // Edge
+                const edge = document.createElement('div');
+                edge.className = 'edge';
+                const edgeSurface = document.createElement('div');
+                edgeSurface.className = 'edge-surface';
+                edgeSurface.style.backgroundColor = this.colors.shadow;
+                edge.appendChild(edgeSurface);
+                
+                // Assemble the coin
+                this.coinEl.appendChild(headsFace);
+                this.coinEl.appendChild(tailsFace);
+                this.coinEl.appendChild(edge);
+                container.appendChild(this.coinEl);
+                
+                this.containerElement.appendChild(container);
+            }
+
+            /**
+             * Sets the coin's rotation based on its current outcome.
+             * @param {boolean} isAnimating - If true, a CSS transition is applied.
+             * @private
+             */
+            _setRotation(isAnimating) {
+                let rotationStr = '';
+                if (isAnimating) {
+                    // Full flips + final outcome rotation for animation
+                    switch (this.outcome) {
+                        case 'heads': rotationStr = 'rotateY(720deg)'; break; // 2 full spins
+                        case 'tails': rotationStr = 'rotateY(900deg)'; break; // 2.5 spins
+                        case 'edge':  rotationStr = 'rotateY(810deg)'; break;  // 2.25 spins
+                        default:      rotationStr = 'rotateY(720deg)';
+                    }
+                    this.coinEl.style.transition = 'transform 1.5s cubic-bezier(0.3, 0, 0.3, 1)';
+                } else {
+                    // Static rotation for the final state
+                    switch (this.outcome) {
+                        case 'heads': rotationStr = 'rotateY(0deg)';   break;
+                        case 'tails': rotationStr = 'rotateY(180deg)'; break;
+                        case 'edge':  rotationStr = 'rotateY(90deg)';  break;
+                        default:      rotationStr = 'rotateY(0deg)';
+                    }
+                    this.coinEl.style.transition = 'none';
+                }
+                this.coinEl.style.transform = rotationStr;
+            }
+
+            /**
+             * Flips the coin to a specified outcome.
+             * @param {'heads'|'tails'|'edge'} targetOutcome - The desired final state of the coin.
+             */
+            flip(targetOutcome) {
+                if (this.isFlipping) return;
+                if (!['heads', 'tails', 'edge'].includes(targetOutcome)) {
+                    console.error('Invalid outcome for flip(). Use "heads", "tails", or "edge".');
+                    return;
+                }
+
+                this.isFlipping = true;
+                this.outcome = targetOutcome;
+
+                this._setRotation(true); // Apply rotation with animation
+
+                // After the animation duration, remove the transition and set the static final state
+                setTimeout(() => {
+                    this.isFlipping = false;
+                    this._setRotation(false);
+                }, 1500); // Must match the CSS transition duration
+            }
+        }
+
+
+        /*******************************************************************
+         *
+         * DEMO IMPLEMENTATION
+         * This shows how to use the FlippableCoin class above.
+         *
+         *******************************************************************/
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Get the container elements from the DOM
+            const goldContainer = document.getElementById('gold-coin-container');
+            const emeraldContainer = document.getElementById('emerald-coin-container');
+            const rubyContainer = document.getElementById('ruby-coin-container');
+            
+            // 2. Define custom colors for new coin types
+            const emeraldColors = { primary: '#009B77', shadow: '#005F48' };
+            const rubyColors = { primary: '#E0115F', shadow: '#9B003A' };
+            const goldColors = { primary: '#ffd700', shadow: '#c4a600' };
+
+            // 3. Create new instances of the FlippableCoin class
+            const goldCoin = new FlippableCoin({
+                containerElement: goldContainer,
+                colors: goldColors,
+                initialOutcome: 'heads'
+            });
+
+            const emeraldCoin = new FlippableCoin({
+                containerElement: emeraldContainer,
+                colors: emeraldColors,
+                initialOutcome: 'tails'
+            });
+
+            const rubyCoin = new FlippableCoin({
+                containerElement: rubyContainer,
+                colors: rubyColors,
+                initialOutcome: 'edge'
+            });
+
+            const allCoins = [goldCoin, emeraldCoin, rubyCoin];
+            const flipButton = document.getElementById('flip-button');
+
+            // 4. Set up the button to flip the coins
+            flipButton.addEventListener('click', () => {
+                // Prevent multiple flips at once
+                if (allCoins.some(coin => coin.isFlipping)) {
+                    return;
+                }
+                
+                flipButton.disabled = true;
+
+                const outcomes = ['heads', 'tails', 'edge'];
+                
+                allCoins.forEach(coin => {
+                    // Get a random outcome
+                    const rand = Math.random();
+                    let randomOutcome;
+                    if (rand < 0.05) { // 5% chance for edge
+                        randomOutcome = 'edge';
+                    } else if (rand < 0.525) { // 47.5% for heads
+                        randomOutcome = 'heads';
+                    } else { // 47.5% for tails
+                        randomOutcome = 'tails';
+                    }
+                    coin.flip(randomOutcome);
+                });
+                
+                // Re-enable the button after the animation finishes
+                setTimeout(() => {
+                    flipButton.disabled = false;
+                }, 1500);
+            });
+        });
+    </script>
+
+</body>
+</html>

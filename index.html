@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Flip Idle - Basic Implementation</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-layout">
+        <!-- Left Sidebar with Tabs -->
+        <div class="sidebar">
+            <div class="tab-buttons">
+                <button class="tab-button active" data-tab="upgrades">🚀 Upgrades</button>
+                <button class="tab-button" data-tab="settings">⚙️ Settings</button>
+                <button class="tab-button" data-tab="debug">🐛 Debug</button>
+                <button class="tab-button" data-tab="prestige">✨ Prestige</button>
+            </div>
+            
+            <div class="tab-content">
+                <!-- Upgrades Tab -->
+                <div class="tab-panel active" id="tab-upgrades">
+                    <h3>🚀 Upgrades</h3>
+                    <!-- NOTE: Keep upgrade descriptions short and clear (max 3-4 words) for compact layout -->
+                    <div class="upgrades-container">
+                        <div class="upgrade-card">
+                            <div class="upgrade-icon">💎</div>
+                            <div class="upgrade-middle">
+                                <div class="upgrade-name">Coin Value</div>
+                                <div class="upgrade-description">More coins per heads</div>
+                                <div class="upgrade-effect" id="coin-value-effect">1 -> (2)</div>
+                            </div>
+                            <div class="upgrade-right">
+                                <div class="upgrade-level">Lv <span id="coin-value-level">0 / 50</span></div>
+                                <button class="upgrade-button" id="upgrade-coin-value">
+                                    <span id="coin-value-cost">10</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="upgrade-card">
+                            <div class="upgrade-icon">⚡</div>
+                            <div class="upgrade-middle">
+                                <div class="upgrade-name">Coin Multiplier</div>
+                                <div class="upgrade-description">Multiply all earnings</div>
+                                <div class="upgrade-effect" id="coin-multiplier-effect">1.0x -> (1.5x)</div>
+                            </div>
+                            <div class="upgrade-right">
+                                <div class="upgrade-level">Lv <span id="coin-multiplier-level">0 / 25</span></div>
+                                <button class="upgrade-button" id="upgrade-coin-multiplier">
+                                    <span id="coin-multiplier-cost">100</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="upgrade-card">
+                            <div class="upgrade-icon">💥</div>
+                            <div class="upgrade-middle">
+                                <div class="upgrade-name">Edge Multiplier</div>
+                                <div class="upgrade-description">Bigger edge jackpots</div>
+                                <div class="upgrade-effect" id="edge-multiplier-effect">20.0x -> (25.0x)</div>
+                            </div>
+                            <div class="upgrade-right">
+                                <div class="upgrade-level">Lv <span id="edge-multiplier-level">0 / 20</span></div>
+                                <button class="upgrade-button" id="upgrade-edge-multiplier">
+                                    <span id="edge-multiplier-cost">500</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="upgrade-card">
+                            <div class="upgrade-icon">🏃</div>
+                            <div class="upgrade-middle">
+                                <div class="upgrade-name">Auto Flipper Speed</div>
+                                <div class="upgrade-description">Faster auto flipper speed</div>
+                                <div class="upgrade-effect" id="auto-flipper-effect">5.5s -> (5.0s)</div>
+                            </div>
+                            <div class="upgrade-right">
+                                <div class="upgrade-level">Lv <span id="auto-flipper-level">0 / 30</span></div>
+                                <button class="upgrade-button" id="upgrade-auto-flipper">
+                                    <span id="auto-flipper-cost">50</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="upgrade-card">
+                            <div class="upgrade-icon">🪙</div>
+                            <div class="upgrade-middle">
+                                <div class="upgrade-name">More Coins</div>
+                                <div class="upgrade-description">More coins per flip</div>
+                                <div class="upgrade-effect" id="additional-coins-effect">1 -> (2)</div>
+                            </div>
+                            <div class="upgrade-right">
+                                <div class="upgrade-level">Lv <span id="additional-coins-level">0 / 30</span></div>
+                                <button class="upgrade-button" id="upgrade-additional-coins">
+                                    <span id="additional-coins-cost">25</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="upgrade-card">
+                            <div class="upgrade-icon">🔄</div>
+                            <div class="upgrade-middle">
+                                <div class="upgrade-name">Auto Flipper Count</div>
+                                <div class="upgrade-description">More auto flippers</div>
+                                <div class="upgrade-effect" id="auto-flipper-count-effect">0 -> (1)</div>
+                            </div>
+                            <div class="upgrade-right">
+                                <div class="upgrade-level">Lv <span id="auto-flipper-count-level">0 / 100</span></div>
+                                <button class="upgrade-button" id="upgrade-auto-flipper-count">
+                                    <span id="auto-flipper-count-cost">150</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="upgrade-card">
+                            <div class="upgrade-icon">🎯</div>
+                            <div class="upgrade-middle">
+                                <div class="upgrade-name">Heads Chance</div>
+                                <div class="upgrade-description">Better heads odds</div>
+                                <div class="upgrade-effect" id="heads-chance-effect">49.9% -> (50.9%)</div>
+                            </div>
+                            <div class="upgrade-right">
+                                <div class="upgrade-level">Lv <span id="heads-chance-level">0 / 25</span></div>
+                                <button class="upgrade-button" id="upgrade-heads-chance">
+                                    <span id="heads-chance-cost">200</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="upgrade-card">
+                            <div class="upgrade-icon">⚡</div>
+                            <div class="upgrade-middle">
+                                <div class="upgrade-name">Edge Chance</div>
+                                <div class="upgrade-description">Better edge odds</div>
+                                <div class="upgrade-effect" id="edge-chance-effect">0.2% -> (0.3%)</div>
+                            </div>
+                            <div class="upgrade-right">
+                                <div class="upgrade-level">Lv <span id="edge-chance-level">0 / 50</span></div>
+                                <button class="upgrade-button" id="upgrade-edge-chance">
+                                    <span id="edge-chance-cost">1000</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="upgrade-card">
+                            <div class="upgrade-icon">🔥</div>
+                            <div class="upgrade-middle">
+                                <div class="upgrade-name">Streak Power</div>
+                                <div class="upgrade-description">Stronger streak bonus</div>
+                                <div class="upgrade-effect" id="streak-multiplier-effect">20% -> (25%)</div>
+                            </div>
+                            <div class="upgrade-right">
+                                <div class="upgrade-level">Lv <span id="streak-multiplier-level">0 / 40</span></div>
+                                <button class="upgrade-button" id="upgrade-streak-multiplier">
+                                    <span id="streak-multiplier-cost">300</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="upgrade-card">
+                            <div class="upgrade-icon">📏</div>
+                            <div class="upgrade-middle">
+                                <div class="upgrade-name">Streak Length</div>
+                                <div class="upgrade-description">Longer max streaks</div>
+                                <div class="upgrade-effect" id="streak-length-effect">5 -> (6)</div>
+                            </div>
+                            <div class="upgrade-right">
+                                <div class="upgrade-level">Lv <span id="streak-length-level">0 / 20</span></div>
+                                <button class="upgrade-button" id="upgrade-streak-length">
+                                    <span id="streak-length-cost">500</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="upgrade-card">
+                            <div class="upgrade-icon">💰</div>
+                            <div class="upgrade-middle">
+                                <div class="upgrade-name">Double Value</div>
+                                <div class="upgrade-description">Chance to double coins</div>
+                                <div class="upgrade-effect" id="double-value-chance-effect">0.0% -> (1.0%)</div>
+                            </div>
+                            <div class="upgrade-right">
+                                <div class="upgrade-level">Lv <span id="double-value-chance-level">0 / 30</span></div>
+                                <button class="upgrade-button" id="upgrade-double-value-chance">
+                                    <span id="double-value-chance-cost">750</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div class="tab-panel" id="tab-settings">
+                    <h3>⚙️ Settings</h3>
+                    <div class="settings-container">
+                        <div class="setting-item">
+                            <label for="animation-speed">Animation Speed</label>
+                            <select id="animation-speed">
+                                <option value="slow">Slow</option>
+                                <option value="normal" selected>Normal</option>
+                                <option value="fast">Fast</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="sound-effects">Sound Effects</label>
+                            <input type="checkbox" id="sound-effects" checked>
+                        </div>
+                        <div class="setting-item">
+                            <label for="show-statistics">Show Statistics</label>
+                            <input type="checkbox" id="show-statistics" checked>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Debug Tab -->
+                <div class="tab-panel" id="tab-debug">
+                    <h3>🐛 Debug Menu</h3>
+                    <p class="debug-description">Testing tools for development</p>
+                    <div class="debug-buttons">
+                        <h4>💰 Add Currency</h4>
+                        <div class="debug-button-row">
+                            <button class="debug-button" id="debug-add-1k">+1K</button>
+                            <button class="debug-button" id="debug-add-10k">+10K</button>
+                            <button class="debug-button" id="debug-add-100k">+100K</button>
+                            <button class="debug-button" id="debug-add-1m">+1M</button>
+                            <button class="debug-button" id="debug-add-1e100">+1e100</button>
+                        </div>
+                        <div class="debug-button-row">
+                            <button class="debug-button" id="debug-double-coins">Double Coins</button>
+                        </div>
+                        <h4>🪙 Force Coin Outcomes</h4>
+                        <div class="debug-button-row">
+                            <button class="debug-button debug-button-heads" id="debug-force-heads">Force Heads</button>
+                            <button class="debug-button debug-button-tails" id="debug-force-tails">Force Tails</button>
+                            <button class="debug-button debug-button-edge" id="debug-force-edge">Force Edge</button>
+                        </div>
+                        <h4>🔄 Game Control</h4>
+                        <div class="debug-button-row">
+                            <button class="debug-button" id="debug-reset-streak">Reset Streak</button>
+                            <button class="debug-button debug-button-danger" id="debug-reset">Reset Game</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prestige Tab -->
+                <div class="tab-panel" id="tab-prestige">
+                    <h3>✨ Prestige</h3>
+                    <div class="prestige-container">
+                        <p class="prestige-description">Prestige system coming soon!</p>
+                        <div class="prestige-info">
+                            <div class="prestige-stat">
+                                <div class="prestige-label">Prestige Level</div>
+                                <div class="prestige-value">0</div>
+                            </div>
+                            <div class="prestige-stat">
+                                <div class="prestige-label">Prestige Points</div>
+                                <div class="prestige-value">0</div>
+                            </div>
+                        </div>
+                        <button class="prestige-button" disabled>
+                            Prestige (Coming Soon)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Game Area -->
+        <div class="main-content">
+            <div class="game-container">
+                <!-- Top Section: Title and Currency -->
+                <div class="game-header">
+                    <h1>🪙 Coin Flip Idle</h1>
+                    
+                    <div class="currency-display">
+                        <div class="currency-stat">
+                            💰 <span class="currency-value" id="currency-amount">0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Middle Section: Coin Flipping Visualization -->
+                <div class="game-main">
+                    <div class="coin-container" id="coin-container">
+                        <div class="coin" id="coin">
+                            <div class="face heads">H</div>
+                            <div class="face tails">T</div>
+                            <div class="edge">
+                                <div class="edge-surface"></div>
+                            </div>
+                        </div>
+                        <div class="coin-result" id="coin-result-main"></div>
+                        <div class="coin-timer" id="coin-timer-0"></div>
+                    </div>
+                </div>
+
+                <!-- Bottom Section: Result and Stats -->
+                <div class="game-footer">
+                    <div class="stats" id="stats-section">
+                        <div class="stat">
+                            <div class="stat-label">Total Flips</div>
+                            <div class="stat-value" id="total-flips">0</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Heads</div>
+                            <div class="stat-value" id="heads-count">0</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Tails</div>
+                            <div class="stat-value" id="tails-count">0</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Edge</div>
+                            <div class="stat-value" id="edge-count">0</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Coins per Flip</div>
+                            <div class="stat-value" id="coins-per-flip">1</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Heads Chance</div>
+                            <div class="stat-value" id="heads-probability">49.9%</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Tails Chance</div>
+                            <div class="stat-value" id="tails-probability">49.9%</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Edge Chance</div>
+                            <div class="stat-value" id="edge-probability">0.2%</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">
+                                Auto-Flip
+                                <button class="auto-flip-toggle" id="auto-flip-toggle">Turn Off</button>
+                            </div>
+                            <div class="stat-value" id="auto-flip-interval">Off</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/display-utils.js"></script>
+    <script src="js/currency-manager.js"></script>
+    <script src="js/upgrade-manager.js"></script>
+    <script src="js/debug-manager.js"></script>
+    <script src="js/settings-manager.js"></script>
+    <script src="js/tab-manager.js"></script>
+    <script src="js/multi-coin-visualizer.js"></script>
+    <script src="js/coin-flipper.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html> 
