@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff700;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#ffd700;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#daa520;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b8860b;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="sparkleGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#fff700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffd700;stop-opacity:0.8" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Coin shadow for depth (subtle) -->
+  <ellipse cx="17" cy="17" rx="8.5" ry="4.5" fill="#000000" opacity="0.2"/>
+  
+  <!-- Coin in perspective (mid-flip) -->
+  <ellipse cx="16" cy="16" rx="8" ry="4" fill="url(#goldGradient)" stroke="#8b6914" stroke-width="1.5"/>
+  
+  <!-- Coin edge detail -->
+  <ellipse cx="16" cy="16" rx="8" ry="4" fill="none" stroke="#fff700" stroke-width="0.8" opacity="0.9"/>
+  
+  <!-- Inner coin detail -->
+  <ellipse cx="16" cy="16" rx="6" ry="3" fill="none" stroke="#ffffff" stroke-width="0.6" opacity="0.7"/>
+  
+  <!-- Enhanced sparkle effects around coin -->
+  <circle cx="8" cy="10" r="1.2" fill="url(#sparkleGradient)" opacity="1"/>
+  <circle cx="24" cy="12" r="1" fill="url(#sparkleGradient)" opacity="0.9"/>
+  <circle cx="10" cy="22" r="0.8" fill="url(#sparkleGradient)" opacity="0.8"/>
+  <circle cx="22" cy="24" r="1" fill="url(#sparkleGradient)" opacity="1"/>
+  
+  <!-- Additional small sparkles for more magic -->
+  <circle cx="6" cy="16" r="0.4" fill="#ffffff" opacity="0.9"/>
+  <circle cx="26" cy="16" r="0.4" fill="#ffffff" opacity="0.9"/>
+  <circle cx="16" cy="8" r="0.3" fill="#fff700" opacity="0.8"/>
+  <circle cx="16" cy="24" r="0.3" fill="#fff700" opacity="0.8"/>
+  
+  <!-- Enhanced motion lines to show flipping -->
+  <path d="M 6 16 Q 12 12 18 16" stroke="#ffffff" stroke-width="1.2" fill="none" opacity="0.7"/>
+  <path d="M 14 16 Q 20 20 26 16" stroke="#ffffff" stroke-width="1.2" fill="none" opacity="0.7"/>
+</svg> 
