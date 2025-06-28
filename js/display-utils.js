@@ -420,6 +420,81 @@ class DisplayUtils {
     getConfig() {
         return { ...this.config };
     }
+
+    /**
+     * Show a custom confirm dialog that matches the game's styling
+     * @param {string} title - The title of the dialog
+     * @param {string} message - The message to display
+     * @returns {Promise<boolean>} - Promise that resolves to true if confirmed, false if cancelled
+     */
+    showConfirmDialog(title, message) {
+        return new Promise((resolve) => {
+            const overlay = document.getElementById('custom-confirm-dialog');
+            const titleElement = document.getElementById('confirm-dialog-title');
+            const messageElement = document.getElementById('confirm-dialog-message');
+            const confirmButton = document.getElementById('confirm-dialog-confirm');
+            const cancelButton = document.getElementById('confirm-dialog-cancel');
+
+            if (!overlay || !titleElement || !messageElement || !confirmButton || !cancelButton) {
+                console.error('Custom confirm dialog elements not found, falling back to browser confirm');
+                resolve(confirm(`${title}\n\n${message}`));
+                return;
+            }
+
+            // Set the content
+            titleElement.textContent = title;
+            messageElement.textContent = message;
+
+            // Show the dialog
+            overlay.classList.add('show');
+
+            // Handle confirm
+            const handleConfirm = () => {
+                cleanup();
+                resolve(true);
+            };
+
+            // Handle cancel
+            const handleCancel = () => {
+                cleanup();
+                resolve(false);
+            };
+
+            // Handle escape key
+            const handleEscape = (e) => {
+                if (e.key === 'Escape') {
+                    handleCancel();
+                }
+            };
+
+            // Handle click outside dialog
+            const handleOverlayClick = (e) => {
+                if (e.target === overlay) {
+                    handleCancel();
+                }
+            };
+
+            // Cleanup function
+            const cleanup = () => {
+                overlay.classList.remove('show');
+                confirmButton.removeEventListener('click', handleConfirm);
+                cancelButton.removeEventListener('click', handleCancel);
+                document.removeEventListener('keydown', handleEscape);
+                overlay.removeEventListener('click', handleOverlayClick);
+            };
+
+            // Add event listeners
+            confirmButton.addEventListener('click', handleConfirm);
+            cancelButton.addEventListener('click', handleCancel);
+            document.addEventListener('keydown', handleEscape);
+            overlay.addEventListener('click', handleOverlayClick);
+
+            // Focus the confirm button for keyboard navigation
+            setTimeout(() => {
+                confirmButton.focus();
+            }, 100);
+        });
+    }
 }
 
 // Create a singleton instance for global use

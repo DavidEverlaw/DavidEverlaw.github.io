@@ -346,6 +346,8 @@ class CoinFlipper {
         
         // Show the result
         setTimeout(() => {
+            // Clear any inline display:none style from reset
+            resultElement.style.display = '';
             resultElement.classList.add('show');
         }, 50);
         
@@ -382,8 +384,7 @@ class CoinFlipper {
         
         // 1. Streak information
         if (streakInfo && streakInfo.count > 1) {
-            const multiplierPercent = Math.round(streakInfo.multiplier * 100);
-            resultParts.push(`<span class="streak-info">🔥${streakInfo.count} (${multiplierPercent}%)</span>`);
+            resultParts.push(`<span class="streak-info">🔥${streakInfo.count}</span>`);
         }
         
         // 2. Earnings with special indicators
@@ -424,6 +425,7 @@ class CoinFlipper {
         document.getElementById('edge-count').textContent = this.displayUtils.formatNumber(this.stats.edge, { forceInteger: true });
         this.updateCoinsPerFlip();
         this.updateProbabilities();
+        this.updateUpgradeStats();
     }
 
     updateProbabilities() {
@@ -462,6 +464,59 @@ class CoinFlipper {
         }
     }
 
+    updateUpgradeStats() {
+        if (!this.upgradeManager) return;
+        
+        // Update coin value bonus
+        const coinValueBonusElement = document.getElementById('coin-value-bonus');
+        if (coinValueBonusElement) {
+            const bonus = this.upgradeManager.getCoinValueBonus();
+            coinValueBonusElement.textContent = `+${this.displayUtils.formatCurrency(bonus)}`;
+        }
+        
+        // Update coin multiplier
+        const coinMultiplierElement = document.getElementById('coin-multiplier');
+        if (coinMultiplierElement) {
+            const multiplier = this.upgradeManager.getCoinMultiplier();
+            coinMultiplierElement.textContent = this.displayUtils.formatMultiplier(multiplier);
+        }
+        
+        // Update edge multiplier
+        const edgeMultiplierElement = document.getElementById('edge-multiplier');
+        if (edgeMultiplierElement) {
+            const multiplier = this.upgradeManager.getEdgeMultiplier();
+            edgeMultiplierElement.textContent = this.displayUtils.formatMultiplier(multiplier);
+        }
+        
+        // Update streak multiplier
+        const streakMultiplierElement = document.getElementById('streak-multiplier');
+        if (streakMultiplierElement) {
+            const multiplier = this.upgradeManager.getEffectiveStreakMultiplier();
+            streakMultiplierElement.textContent = `${(multiplier * 100).toFixed(0)}%`;
+        }
+        
+        // Update max streak length
+        const maxStreakLengthElement = document.getElementById('max-streak-length');
+        if (maxStreakLengthElement) {
+            const maxLength = this.upgradeManager.getEffectiveMaxStreakLength();
+            maxStreakLengthElement.textContent = this.displayUtils.formatNumber(maxLength, { forceInteger: true });
+        }
+        
+        // Update double value chance
+        const doubleValueChanceElement = document.getElementById('double-value-chance');
+        if (doubleValueChanceElement) {
+            const chance = this.upgradeManager.getDoubleValueChance();
+            doubleValueChanceElement.textContent = `${(chance * 100).toFixed(1)}%`;
+        }
+        
+        // Update auto flipper count
+        const autoFlipperCountElement = document.getElementById('auto-flipper-count');
+        if (autoFlipperCountElement) {
+            const count = this.upgradeManager.getTotalAutoFlippers();
+            autoFlipperCountElement.textContent = this.displayUtils.formatNumber(count, { forceInteger: true });
+        }
+    }
+
     // Setter for currency manager (to be called from Game class)
     setCurrencyManager(currencyManager) {
         this.currencyManager = currencyManager;
@@ -478,6 +533,9 @@ class CoinFlipper {
         
         // Update probabilities display now that we have the upgrade manager
         this.updateProbabilities();
+        
+        // Update upgrade stats display now that we have the upgrade manager
+        this.updateUpgradeStats();
         
         // Update coin flip states array
         this.updateCoinFlipStates();

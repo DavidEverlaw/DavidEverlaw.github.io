@@ -203,14 +203,6 @@
                     <h3>⚙️ Settings</h3>
                     <div class="settings-container">
                         <div class="setting-item">
-                            <label for="animation-speed">Animation Speed</label>
-                            <select id="animation-speed">
-                                <option value="slow">Slow</option>
-                                <option value="normal" selected>Normal</option>
-                                <option value="fast">Fast</option>
-                            </select>
-                        </div>
-                        <div class="setting-item">
                             <label for="sound-effects">Sound Effects</label>
                             <input type="checkbox" id="sound-effects" checked>
                         </div>
@@ -243,6 +235,18 @@
                             <button class="debug-button debug-button-tails" id="debug-force-tails">Force Tails</button>
                             <button class="debug-button debug-button-edge" id="debug-force-edge">Force Edge</button>
                         </div>
+                        <h4>💾 Save & Load</h4>
+                        <div class="debug-button-row">
+                            <button class="debug-button" id="debug-save-game">Save Game</button>
+                            <button class="debug-button" id="debug-load-game">Load Game</button>
+                        </div>
+                        <div class="debug-button-row">
+                            <button class="debug-button" id="debug-export-save">Export Save</button>
+                            <button class="debug-button" id="debug-import-save">Import Save</button>
+                        </div>
+                        <div class="debug-button-row">
+                            <button class="debug-button debug-button-danger" id="debug-delete-save">Delete Save</button>
+                        </div>
                         <h4>🔄 Game Control</h4>
                         <div class="debug-button-row">
                             <button class="debug-button" id="debug-reset-streak">Reset Streak</button>
@@ -255,20 +259,120 @@
                 <div class="tab-panel" id="tab-prestige">
                     <h3>✨ Prestige</h3>
                     <div class="prestige-container">
-                        <p class="prestige-description">Prestige system coming soon!</p>
+                        <p class="prestige-description">Reset your progress for permanent bonuses!</p>
+                        
                         <div class="prestige-info">
                             <div class="prestige-stat">
                                 <div class="prestige-label">Prestige Level</div>
-                                <div class="prestige-value">0</div>
+                                <div class="prestige-value" id="prestige-level">0</div>
                             </div>
                             <div class="prestige-stat">
                                 <div class="prestige-label">Prestige Points</div>
-                                <div class="prestige-value">0</div>
+                                <div class="prestige-value" id="prestige-points">0</div>
+                            </div>
+                            <div class="prestige-stat">
+                                <div class="prestige-label">Points on Reset</div>
+                                <div class="prestige-value" id="prestige-gain">0</div>
                             </div>
                         </div>
-                        <button class="prestige-button" disabled>
-                            Prestige (Coming Soon)
+                        
+                        <button class="prestige-button" id="prestige-button" disabled>
+                            Need More Progress
                         </button>
+
+                        <div class="prestige-upgrades">
+                            <h4>Prestige Upgrades</h4>
+                            
+                            <div class="upgrade-card">
+                                <div class="upgrade-icon">💰</div>
+                                <div class="upgrade-middle">
+                                    <div class="upgrade-name">Coin Bonus</div>
+                                    <div class="upgrade-description">Permanent coin earnings boost</div>
+                                    <div class="upgrade-effect" id="prestige-coin-bonus-effect">+0% → (+50%)</div>
+                                </div>
+                                <div class="upgrade-right">
+                                    <div class="upgrade-level">Lv <span id="prestige-coin-bonus-level">0 / 50</span></div>
+                                    <button class="upgrade-button" id="prestige-upgrade-coin-bonus">
+                                        <span id="prestige-coin-bonus-cost">1</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="upgrade-card">
+                                <div class="upgrade-icon">⚡</div>
+                                <div class="upgrade-middle">
+                                    <div class="upgrade-name">Flip Speed</div>
+                                    <div class="upgrade-description">Faster coin flip animations</div>
+                                    <div class="upgrade-effect" id="prestige-flip-speed-effect">+0% → (+10%)</div>
+                                </div>
+                                <div class="upgrade-right">
+                                    <div class="upgrade-level">Lv <span id="prestige-flip-speed-level">0 / 25</span></div>
+                                    <button class="upgrade-button" id="prestige-upgrade-flip-speed">
+                                        <span id="prestige-flip-speed-cost">2</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="upgrade-card">
+                                <div class="upgrade-icon">💥</div>
+                                <div class="upgrade-middle">
+                                    <div class="upgrade-name">Edge Bonus</div>
+                                    <div class="upgrade-description">Bigger edge jackpots</div>
+                                    <div class="upgrade-effect" id="prestige-edge-bonus-effect">+0% → (+100%)</div>
+                                </div>
+                                <div class="upgrade-right">
+                                    <div class="upgrade-level">Lv <span id="prestige-edge-bonus-level">0 / 20</span></div>
+                                    <button class="upgrade-button" id="prestige-upgrade-edge-bonus">
+                                        <span id="prestige-edge-bonus-cost">5</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="upgrade-card">
+                                <div class="upgrade-icon">💸</div>
+                                <div class="upgrade-middle">
+                                    <div class="upgrade-name">Upgrade Discount</div>
+                                    <div class="upgrade-description">Cheaper upgrades</div>
+                                    <div class="upgrade-effect" id="prestige-upgrade-discount-effect">5% → (10%)</div>
+                                </div>
+                                <div class="upgrade-right">
+                                    <div class="upgrade-level">Lv <span id="prestige-upgrade-discount-level">0 / 30</span></div>
+                                    <button class="upgrade-button" id="prestige-upgrade-upgrade-discount">
+                                        <span id="prestige-upgrade-discount-cost">3</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="upgrade-card">
+                                <div class="upgrade-icon">🎁</div>
+                                <div class="upgrade-middle">
+                                    <div class="upgrade-name">Starting Bonus</div>
+                                    <div class="upgrade-description">Start with more coins</div>
+                                    <div class="upgrade-effect" id="prestige-starting-bonus-effect">0 → (1K)</div>
+                                </div>
+                                <div class="upgrade-right">
+                                    <div class="upgrade-level">Lv <span id="prestige-starting-bonus-level">0 / 15</span></div>
+                                    <button class="upgrade-button" id="prestige-upgrade-starting-bonus">
+                                        <span id="prestige-starting-bonus-cost">10</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="upgrade-card">
+                                <div class="upgrade-icon">🔄</div>
+                                <div class="upgrade-middle">
+                                    <div class="upgrade-name">Auto-Flip Bonus</div>
+                                    <div class="upgrade-description">Faster auto-flippers</div>
+                                    <div class="upgrade-effect" id="prestige-auto-flip-bonus-effect">+0% → (+20%)</div>
+                                </div>
+                                <div class="upgrade-right">
+                                    <div class="upgrade-level">Lv <span id="prestige-auto-flip-bonus-level">0 / 20</span></div>
+                                    <button class="upgrade-button" id="prestige-upgrade-auto-flip-bonus">
+                                        <span id="prestige-auto-flip-bonus-cost">8</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -323,7 +427,7 @@
                             <div class="stat-value" id="edge-count">0</div>
                         </div>
                         <div class="stat">
-                            <div class="stat-label">Coins per Flip</div>
+                            <div class="stat-label">Coins</div>
                             <div class="stat-value" id="coins-per-flip">1</div>
                         </div>
                         <div class="stat">
@@ -339,14 +443,55 @@
                             <div class="stat-value" id="edge-probability">0.2%</div>
                         </div>
                         <div class="stat">
-                            <div class="stat-label">
-                                Auto-Flip
-                                <button class="auto-flip-toggle" id="auto-flip-toggle">Turn Off</button>
-                            </div>
+                            <div class="stat-label">Auto-Flip</div>
                             <div class="stat-value" id="auto-flip-interval">Off</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Coin Value Bonus</div>
+                            <div class="stat-value" id="coin-value-bonus">+0</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Coin Multiplier</div>
+                            <div class="stat-value" id="coin-multiplier">×1.0</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Edge Multiplier</div>
+                            <div class="stat-value" id="edge-multiplier">×1.0</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Streak Multiplier</div>
+                            <div class="stat-value" id="streak-multiplier">10%</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Max Streak Length</div>
+                            <div class="stat-value" id="max-streak-length">10</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Double Value Chance</div>
+                            <div class="stat-value" id="double-value-chance">0.0%</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Auto Flipper Count</div>
+                            <div class="stat-value" id="auto-flipper-count">0</div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Confirm Dialog -->
+    <div id="custom-confirm-dialog" class="confirm-dialog-overlay">
+        <div class="confirm-dialog">
+            <div class="confirm-dialog-header">
+                <h3 id="confirm-dialog-title">Confirm Action</h3>
+            </div>
+            <div class="confirm-dialog-content">
+                <p id="confirm-dialog-message">Are you sure you want to proceed?</p>
+            </div>
+            <div class="confirm-dialog-buttons">
+                <button id="confirm-dialog-cancel" class="confirm-button confirm-button-cancel">Cancel</button>
+                <button id="confirm-dialog-confirm" class="confirm-button confirm-button-confirm">Confirm</button>
             </div>
         </div>
     </div>
@@ -355,8 +500,10 @@
     <script src="js/display-utils.js"></script>
     <script src="js/currency-manager.js"></script>
     <script src="js/upgrade-manager.js"></script>
+    <script src="js/prestige-manager.js"></script>
     <script src="js/debug-manager.js"></script>
     <script src="js/settings-manager.js"></script>
+    <script src="js/save-manager.js"></script>
     <script src="js/tab-manager.js"></script>
     <script src="js/multi-coin-visualizer.js"></script>
     <script src="js/coin-flipper.js"></script>

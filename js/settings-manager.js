@@ -5,7 +5,6 @@
 class SettingsManager {
     constructor() {
         this.settings = {
-            animationSpeed: 'normal',
             soundEffects: true,
             showStatistics: true
         };
@@ -16,14 +15,6 @@ class SettingsManager {
     }
 
     setupEventListeners() {
-        // Animation speed setting
-        const animationSpeedSelect = document.getElementById('animation-speed');
-        if (animationSpeedSelect) {
-            animationSpeedSelect.addEventListener('change', (e) => {
-                this.updateSetting('animationSpeed', e.target.value);
-            });
-        }
-
         // Sound effects setting
         const soundEffectsCheckbox = document.getElementById('sound-effects');
         if (soundEffectsCheckbox) {
@@ -57,9 +48,6 @@ class SettingsManager {
      * Apply current settings to the game
      */
     applySettings() {
-        // Apply animation speed
-        this.applyAnimationSpeed();
-        
         // Apply statistics visibility
         this.applyStatisticsVisibility();
         
@@ -67,25 +55,7 @@ class SettingsManager {
         // this.applySoundEffects();
     }
 
-    /**
-     * Apply animation speed setting
-     */
-    applyAnimationSpeed() {
-        const speedMultipliers = {
-            'slow': 1.5,
-            'normal': 1.0,
-            'fast': 0.5
-        };
-        
-        const multiplier = speedMultipliers[this.settings.animationSpeed] || 1.0;
-        const baseDuration = 1500; // Base flip duration in ms
-        const newDuration = Math.round(baseDuration * multiplier);
-        
-        // Update the config if it exists
-        if (typeof GameConfig !== 'undefined' && GameConfig.ANIMATION) {
-            GameConfig.ANIMATION.FLIP_DURATION = newDuration;
-        }
-    }
+
 
     /**
      * Apply statistics visibility setting
@@ -129,12 +99,6 @@ class SettingsManager {
      * Update the UI to reflect current settings
      */
     updateUI() {
-        // Update animation speed select
-        const animationSpeedSelect = document.getElementById('animation-speed');
-        if (animationSpeedSelect) {
-            animationSpeedSelect.value = this.settings.animationSpeed;
-        }
-
         // Update sound effects checkbox
         const soundEffectsCheckbox = document.getElementById('sound-effects');
         if (soundEffectsCheckbox) {
@@ -161,7 +125,6 @@ class SettingsManager {
      */
     resetSettings() {
         this.settings = {
-            animationSpeed: 'normal',
             soundEffects: true,
             showStatistics: true
         };

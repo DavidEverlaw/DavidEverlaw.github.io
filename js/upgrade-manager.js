@@ -7,7 +7,6 @@ class UpgradeManager {
         this.currencyManager = currencyManager;
         this.autoFlipIntervals = []; // Array of intervals for individual coin auto-flippers
         this.coinAutoFlipperStates = []; // Array to track each coin's auto-flipper state
-        this.autoFlipEnabled = true; // Toggle state for auto-flipper
         this.coinFlipper = null; // Reference to coin flipper for individual flips
         
         // Use the global DisplayUtils instance
@@ -145,12 +144,6 @@ class UpgradeManager {
             autoFlipperBtn.addEventListener('click', () => this.purchaseUpgrade('autoFlipper'));
         }
 
-        // Auto Flipper toggle button
-        const autoFlipToggleBtn = document.getElementById('auto-flip-toggle');
-        if (autoFlipToggleBtn) {
-            autoFlipToggleBtn.addEventListener('click', () => this.toggleAutoFlipper());
-        }
-
         // Additional Coins upgrade button
         const additionalCoinsBtn = document.getElementById('upgrade-additional-coins');
         if (additionalCoinsBtn) {
@@ -254,8 +247,15 @@ class UpgradeManager {
     getUpgradeCost(upgradeType) {
         const upgrade = this.upgrades[upgradeType];
         if (!upgrade) return 0;
-
-        return Math.floor(upgrade.baseCost * Math.pow(upgrade.costMultiplier, upgrade.level));
+        
+        let cost = Math.floor(upgrade.baseCost * Math.pow(upgrade.costMultiplier, upgrade.level));
+        
+        // Apply prestige upgrade discount
+        if (window.prestigeManager) {
+            cost = Math.floor(cost * window.prestigeManager.getUpgradeDiscountMultiplier());
+        }
+        
+        return cost;
     }
 
     /**
@@ -401,12 +401,28 @@ class UpgradeManager {
         
         // If no speed upgrades, use base interval (auto-flippers work at base speed)
         if (upgrade.level === 0) {
-            return baseInterval;
+            let interval = baseInterval;
+            
+            // Apply prestige auto-flip bonus even without upgrades
+            if (window.prestigeManager) {
+                const prestigeBonus = window.prestigeManager.getAutoFlipBonusMultiplier();
+                interval = interval / prestigeBonus; // Faster flipping = lower interval
+                interval = Math.max(interval, minInterval); // Still respect minimum
+            }
+            
+            return Math.round(interval);
         }
         
         // Calculate reduction: each level reduces interval by reductionPerLevel percentage
         const reductionFactor = Math.pow(1 - reductionPerLevel, upgrade.level);
-        const interval = Math.max(baseInterval * reductionFactor, minInterval);
+        let interval = Math.max(baseInterval * reductionFactor, minInterval);
+        
+        // Apply prestige auto-flip bonus (reduces interval further)
+        if (window.prestigeManager) {
+            const prestigeBonus = window.prestigeManager.getAutoFlipBonusMultiplier();
+            interval = interval / prestigeBonus; // Faster flipping = lower interval
+            interval = Math.max(interval, minInterval); // Still respect minimum
+        }
         
         return Math.round(interval);
     }
@@ -430,7 +446,7 @@ class UpgradeManager {
         return this.upgrades.autoFlipperCount.level;
     }
 
-        /**
+    /**
      * Update the auto-flipper functionality
      */
     updateAutoFlipper() {
@@ -441,7 +457,7 @@ class UpgradeManager {
         // Update visual indicators
         this.updateAutoFlipStatus(interval);
         
-        if (interval > 0 && this.autoFlipEnabled && totalAutoFlippers > 0) {
+        if (interval > 0 && totalAutoFlippers > 0) {
             // Assign auto-flippers to coins (one per coin up to the number of auto-flippers)
             const coinsToAutoFlip = Math.min(totalAutoFlippers, totalCoins);
             
@@ -494,10 +510,16 @@ class UpgradeManager {
      */
     showAutoFlipperIndicator(coinIndex) {
         const indicatorElement = document.getElementById(`coin-timer-${coinIndex}`);
+        console.log(`Debug: Trying to show auto-flipper indicator for coin ${coinIndex}, element found:`, !!indicatorElement);
         if (indicatorElement) {
             indicatorElement.classList.add('active', 'auto-flipper-indicator');
             indicatorElement.textContent = '🤖';
             indicatorElement.style.background = '#4a5568';
+            // Override any inline display:none style from reset
+            indicatorElement.style.display = 'flex';
+            console.log(`Debug: Auto-flipper indicator shown for coin ${coinIndex}`);
+        } else {
+            console.warn(`Debug: Could not find coin-timer-${coinIndex} element`);
         }
     }
 
@@ -510,6 +532,7 @@ class UpgradeManager {
         if (indicatorElement) {
             indicatorElement.classList.remove('active', 'auto-flipper-indicator');
             indicatorElement.textContent = '';
+            indicatorElement.style.display = 'none';
         }
     }
 
@@ -533,7 +556,7 @@ class UpgradeManager {
         }
 
         // Only schedule if auto-flippers are still enabled and we have a coin flipper
-        if (!this.autoFlipEnabled || !this.coinFlipper) {
+        if (!this.coinFlipper) {
             return;
         }
 
@@ -597,32 +620,14 @@ class UpgradeManager {
     }
 
     /**
-     * Toggle the auto-flipper functionality
-     */
-    toggleAutoFlipper() {
-        this.autoFlipEnabled = !this.autoFlipEnabled;
-        this.updateAutoFlipper();
-        
-        // Update toggle button text
-        const toggleBtn = document.getElementById('auto-flip-toggle');
-        if (toggleBtn) {
-            toggleBtn.textContent = this.autoFlipEnabled ? 'Turn Off' : 'Turn On';
-            toggleBtn.classList.toggle('auto-flip-disabled', !this.autoFlipEnabled);
-        }
-        
-        console.log(`Auto-flipper ${this.autoFlipEnabled ? 'enabled' : 'disabled'}`);
-    }
-
-    /**
      * Update the auto-flip status indicator
      * @param {number} interval - Current auto-flip interval in milliseconds
      */
     updateAutoFlipStatus(interval) {
         const intervalElement = document.getElementById('auto-flip-interval');
         const coinContainer = document.getElementById('coin-container');
-        const toggleBtn = document.getElementById('auto-flip-toggle');
         
-        if (interval > 0 && this.autoFlipEnabled) {
+        if (interval > 0) {
             // Update interval display in stats
             if (intervalElement) {
                 intervalElement.textContent = this.displayUtils.formatTime(interval / 1000);
@@ -631,28 +636,6 @@ class UpgradeManager {
             // Add visual effect to coin
             if (coinContainer) {
                 coinContainer.classList.add('auto-flipping');
-            }
-            // Show and update toggle button
-            if (toggleBtn) {
-                toggleBtn.classList.add('show');
-                toggleBtn.classList.remove('auto-flip-disabled');
-                toggleBtn.textContent = 'Turn Off';
-            }
-        } else if (interval > 0 && !this.autoFlipEnabled) {
-            // Show "Disabled" status when toggle is off but upgrade exists
-            if (intervalElement) {
-                intervalElement.textContent = 'Disabled';
-                intervalElement.setAttribute('data-value', 'disabled');
-            }
-            // Remove visual effect from coin
-            if (coinContainer) {
-                coinContainer.classList.remove('auto-flipping');
-            }
-            // Show and update toggle button
-            if (toggleBtn) {
-                toggleBtn.classList.add('show');
-                toggleBtn.classList.add('auto-flip-disabled');
-                toggleBtn.textContent = 'Turn On';
             }
         } else {
             // Show "Off" status when no upgrade
@@ -663,10 +646,6 @@ class UpgradeManager {
             // Remove visual effect from coin
             if (coinContainer) {
                 coinContainer.classList.remove('auto-flipping');
-            }
-            // Hide toggle button
-            if (toggleBtn) {
-                toggleBtn.classList.remove('show');
             }
         }
     }
@@ -706,6 +685,11 @@ class UpgradeManager {
         this.updateUpgradeButton('streakLength');
         this.updateUpgradeButton('doubleValueChance');
         this.updateUpgradeButton('autoFlipperCount');
+        
+        // Update stats display when upgrades change
+        if (this.coinFlipper) {
+            this.coinFlipper.updateStats();
+        }
     }
 
     /**
@@ -723,8 +707,6 @@ class UpgradeManager {
         if (levelElement) {
             levelElement.textContent = `${upgrade.level} / ${upgrade.maxLevel}`;
         }
-
-
 
         // Update effect display with current -> (next) format or "MAX" for maxed upgrades
         const effectElement = document.getElementById(`${upgradeType.replace(/([A-Z])/g, '-$1').toLowerCase()}-effect`);
@@ -753,16 +735,31 @@ class UpgradeManager {
                 const currentInterval = this.getAutoFlipInterval();
                 const nextLevel = upgrade.level + 1;
                 
-                // Calculate next interval
+                // Calculate next interval with prestige bonuses
                 const baseInterval = GameConfig.UPGRADES.AUTO_FLIPPER.BASE_INTERVAL;
                 const reductionPerLevel = GameConfig.UPGRADES.AUTO_FLIPPER.REDUCTION_PER_LEVEL;
                 const minInterval = GameConfig.UPGRADES.AUTO_FLIPPER.MIN_INTERVAL;
-                const nextReductionFactor = Math.pow(1 - reductionPerLevel, nextLevel);
-                const nextInterval = Math.max(baseInterval * nextReductionFactor, minInterval);
                 
-
+                let nextInterval;
+                if (nextLevel === 1) {
+                    // If going from level 0 to 1, use base interval
+                    nextInterval = baseInterval;
+                } else {
+                    // Calculate reduction for next level
+                    const nextReductionFactor = Math.pow(1 - reductionPerLevel, nextLevel);
+                    nextInterval = Math.max(baseInterval * nextReductionFactor, minInterval);
+                }
+                
+                // Apply prestige auto-flip bonus to next interval (same as current)
+                if (window.prestigeManager) {
+                    const prestigeBonus = window.prestigeManager.getAutoFlipBonusMultiplier();
+                    nextInterval = nextInterval / prestigeBonus; // Faster flipping = lower interval
+                    nextInterval = Math.max(nextInterval, minInterval); // Still respect minimum
+                }
+                
+                nextInterval = Math.round(nextInterval);
+                
                 effectElement.textContent = this.displayUtils.formatRange(currentInterval / 1000, nextInterval / 1000, 'formatTime');
-
             } else if (upgradeType === 'additionalCoins') {
                 const currentCoins = this.getTotalCoins();
                 const nextCoins = currentCoins + upgrade.baseEffect;
@@ -853,9 +850,7 @@ class UpgradeManager {
 
     // For save/load system (future)
     getState() {
-        const state = {
-            autoFlipEnabled: this.autoFlipEnabled
-        };
+        const state = {};
         for (const [key, upgrade] of Object.entries(this.upgrades)) {
             state[key] = { level: upgrade.level };
         }
@@ -863,11 +858,6 @@ class UpgradeManager {
     }
 
     setState(state) {
-        // Restore auto-flip enabled state
-        if (state.autoFlipEnabled !== undefined) {
-            this.autoFlipEnabled = state.autoFlipEnabled;
-        }
-        
         for (const [key, data] of Object.entries(state)) {
             if (this.upgrades[key]) {
                 this.upgrades[key].level = data.level || 0;
@@ -885,21 +875,5 @@ class UpgradeManager {
     // Cleanup method
     destroy() {
         this.stopAllAutoFlippers();
-    }
-
-    /**
-     * Toggle the auto-flipper functionality
-     */
-    toggleAutoFlipper() {
-        this.autoFlipEnabled = !this.autoFlipEnabled;
-        if (this.autoFlipEnabled) {
-            this.updateAutoFlipper();
-        } else {
-            if (this.autoFlipInterval) {
-                clearInterval(this.autoFlipInterval);
-                this.autoFlipInterval = null;
-            }
-        }
-        this.updateAutoFlipStatus(this.getAutoFlipInterval());
     }
 } 

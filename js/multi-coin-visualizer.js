@@ -475,6 +475,8 @@ class MultiCoinVisualizer {
         
         // Show the result
         setTimeout(() => {
+            // Clear any inline display:none style from reset
+            resultElement.style.display = '';
             resultElement.classList.add('show');
         }, 50);
         
@@ -511,8 +513,7 @@ class MultiCoinVisualizer {
         
         // 1. Streak information
         if (streakInfo && streakInfo.count > 1) {
-            const multiplierPercent = Math.round(streakInfo.multiplier * 100);
-            resultParts.push(`<span class="streak-info">🔥${streakInfo.count} (${multiplierPercent}%)</span>`);
+            resultParts.push(`<span class="streak-info">🔥${streakInfo.count}</span>`);
         }
         
         // 2. Earnings with special indicators

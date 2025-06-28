@@ -160,6 +160,16 @@ class CurrencyManager {
         } else if (outcome === 'edge' && this.upgradeManager && baseEarnings > 0) {
             // For edge outcomes, only apply the coin multiplier (not the flat bonus)
             finalEarnings = baseEarnings * this.upgradeManager.getCoinMultiplier();
+            
+            // Apply prestige edge bonus to edge outcomes
+            if (window.prestigeManager) {
+                finalEarnings *= window.prestigeManager.getEdgeBonusMultiplier();
+            }
+        }
+        
+        // Apply prestige coin bonus to all earnings
+        if (finalEarnings > 0 && window.prestigeManager) {
+            finalEarnings *= window.prestigeManager.getCoinBonusMultiplier();
         }
         
         // Apply streak multiplier if we have earnings and a streak for this coin
@@ -201,6 +211,11 @@ class CurrencyManager {
         // Update upgrade display when currency changes
         if (this.upgradeManager) {
             this.upgradeManager.updateDisplay();
+        }
+        
+        // Update prestige display when currency changes
+        if (window.prestigeManager) {
+            window.prestigeManager.updateDisplay();
         }
     }
 
