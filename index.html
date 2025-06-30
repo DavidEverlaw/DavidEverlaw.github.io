@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David's Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #f0f2f5, #e9ecef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #6c757d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 15px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .project-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>David's Projects</h1>
+            <p class="subtitle">Explore my collection of web projects and experiments</p>
+        </header>
+
+        <div id="loading" class="loading">
+            Loading projects...
+        </div>
+
+        <div id="error" class="error" style="display: none;">
+            Unable to load projects. Please try again later.
+        </div>
+
+        <div id="projects" class="projects-grid" style="display: none;">
+            <!-- Projects will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const GITHUB_USERNAME = 'DavidEverlaw';
+        const REPO_NAME = 'DavidEverlaw.github.io';
+        const GITHUB_API_URL = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents`;
+
+        // Generate title from folder name
+        const getProjectTitle = (folderName) => {
+            return folderName.split('-').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1)
+            ).join(' ');
+        };
+
+        // Fetch README.md content and extract first sentence
+        async function getProjectDescription(projectName) {
+            try {
+                const readmeUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/master/${projectName}/README.md`;
+                const response = await fetch(readmeUrl);
+                
+                if (!response.ok) {
+                    return `A web project: ${projectName}`;
+                }
+                
+                const content = await response.text();
+                
+                // Extract first sentence - look for first period, exclamation, or question mark
+                // Skip markdown headers and empty lines
+                const lines = content.split('\n').filter(line => 
+                    line.trim() && !line.trim().startsWith('#')
+                );
+                
+                if (lines.length === 0) {
+                    return `A web project: ${projectName}`;
+                }
+                
+                const firstParagraph = lines[0].trim();
+                
+                // Find first sentence ending
+                const sentenceMatch = firstParagraph.match(/^[^.!?]*[.!?]/);
+                if (sentenceMatch) {
+                    return sentenceMatch[0].trim();
+                }
+                
+                // If no sentence ending found, return first 100 characters
+                return firstParagraph.length > 100 
+                    ? firstParagraph.substring(0, 100) + '...'
+                    : firstParagraph;
+                    
+            } catch (error) {
+                console.error(`Error fetching README for ${projectName}:`, error);
+                return `A web project: ${projectName}`;
+            }
+        }
+
+        async function fetchProjects() {
+            try {
+                const response = await fetch(GITHUB_API_URL);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const contents = await response.json();
+                
+                // Filter for directories only, excluding .git and other hidden folders
+                const directories = contents.filter(item => 
+                    item.type === 'dir' && 
+                    !item.name.startsWith('.') &&
+                    item.name !== 'node_modules'
+                );
+                
+                return directories;
+            } catch (error) {
+                console.error('Error fetching projects:', error);
+                throw error;
+            }
+        }
+
+        async function checkForProjectImage(projectName) {
+            // Common image names to check for
+            const imageNames = [
+                'favicon.svg'
+            ];
+
+            for (const imageName of imageNames) {
+                try {
+                    const imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/master/${projectName}/${imageName}`;
+                    const response = await fetch(imageUrl, { method: 'HEAD' });
+                    if (response.ok) {
+                        return imageUrl;
+                    }
+                } catch (error) {
+                    // Continue checking other image names
+                }
+            }
+            
+            return null;
+        }
+
+        function createProjectCard(project, title, description, imageUrl) {
+            const projectUrl = `/${project.name}/`;
+            
+            return `
+                <a href="${projectUrl}" class="project-card">
+                    <div class="project-image">
+                        ${imageUrl ? 
+                            `<img src="${imageUrl}" alt="${title} Screenshot" onerror="this.parentElement.innerHTML='📁'">` : 
+                            '📁'
+                        }
+                    </div>
+                    <div class="project-content">
+                        <div class="project-title">${title}</div>
+                        <div class="project-description">${description}</div>
+                    </div>
+                </a>
+            `;
+        }
+
+        async function loadProjects() {
+            const loadingElement = document.getElementById('loading');
+            const errorElement = document.getElementById('error');
+            const projectsElement = document.getElementById('projects');
+
+            try {
+                const projects = await fetchProjects();
+                
+                if (projects.length === 0) {
+                    throw new Error('No projects found');
+                }
+
+                // Create project cards with images and descriptions
+                const projectCards = await Promise.all(
+                    projects.map(async (project) => {
+                        const title = getProjectTitle(project.name);
+                        const description = await getProjectDescription(project.name);
+                        const imageUrl = await checkForProjectImage(project.name);
+                        return createProjectCard(project, title, description, imageUrl);
+                    })
+                );
+
+                // Hide loading, show projects
+                loadingElement.style.display = 'none';
+                projectsElement.innerHTML = projectCards.join('');
+                projectsElement.style.display = 'grid';
+
+            } catch (error) {
+                console.error('Failed to load projects:', error);
+                loadingElement.style.display = 'none';
+                errorElement.style.display = 'block';
+            }
+        }
+
+        // Load projects when page loads
+        document.addEventListener('DOMContentLoaded', loadProjects);
+    </script>
+</body>
+</html> 
