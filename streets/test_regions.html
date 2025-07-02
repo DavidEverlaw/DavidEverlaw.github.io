@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Region Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .region-test { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .status { font-weight: bold; }
+        .success { color: green; }
+        .error { color: red; }
+        .loading { color: orange; }
+    </style>
+</head>
+<body>
+    <h1>Region Data Test</h1>
+    <div id="test-results"></div>
+
+    <script type="module">
+        import DataManager from './js/DataManager.js';
+
+        const dataManager = new DataManager();
+        const results = document.getElementById('test-results');
+
+        const regions = [
+            'san_francisco_ca',
+            'berkeley_ca', 
+            'los_angeles_ca',
+            'new_york_ny',
+            'oakland_ca',
+            'seattle_wa'
+        ];
+
+        async function testRegion(region) {
+            const div = document.createElement('div');
+            div.className = 'region-test';
+            div.innerHTML = `
+                <h3>${region}</h3>
+                <div class="status loading">Testing...</div>
+            `;
+            results.appendChild(div);
+
+            try {
+                const data = await dataManager.loadRegionData(region);
+                div.querySelector('.status').innerHTML = `
+                    <span class="success">✓ Success</span> - ${data.length} streets loaded
+                `;
+                console.log(`${region}: ${data.length} streets`);
+            } catch (error) {
+                div.querySelector('.status').innerHTML = `
+                    <span class="error">✗ Error</span> - ${error.message}
+                `;
+                console.error(`${region}: ${error.message}`);
+            }
+        }
+
+        // Test all regions
+        for (const region of regions) {
+            await testRegion(region);
+        }
+    </script>
+</body>
+</html> 

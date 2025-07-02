@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Boundary Visualizer</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .control-group label {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        
+        select, input, button {
+            padding: 10px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            min-width: 120px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+        
+        .file-input-label {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .file-input-label:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        
+        #map {
+            height: 70vh;
+            width: 100%;
+            border-top: 3px solid #667eea;
+        }
+        
+        .info-panel {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .info-panel.show {
+            display: block;
+        }
+        
+        .info-panel h3 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .info-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .info-item strong {
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 8px;
+            border: 1px solid #f5c6cb;
+            display: none;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 8px;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .legend {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            font-size: 14px;
+        }
+        
+        .legend h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border: 2px solid #333;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🗺️ City Boundary Visualizer</h1>
+        <p>Visualize and inspect GeoJSON boundary data from the City Boundary Fetcher</p>
+    </div>
+    
+    <div class="controls">
+        <div class="control-group">
+            <label for="boundary-select">Saved Boundaries:</label>
+            <select id="boundary-select">
+                <option value="">Select a boundary...</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label for="city-input">Fetch New Boundary:</label>
+            <input type="text" id="city-input" placeholder="City name (e.g., San Francisco)" />
+        </div>
+        
+        <div class="control-group">
+            <label for="state-input">State:</label>
+            <input type="text" id="state-input" placeholder="State (e.g., CA)" maxlength="2" />
+        </div>
+        
+        <button id="fetch-btn">Fetch Boundary</button>
+        
+        <div class="file-input-wrapper">
+            <input type="file" id="file-input" accept=".geojson,.json" />
+            <label for="file-input" class="file-input-label">Upload GeoJSON</label>
+        </div>
+        
+        <button id="clear-btn">Clear Map</button>
+    </div>
+    
+    <div class="error-message" id="error-message"></div>
+    <div class="success-message" id="success-message"></div>
+    
+    <div id="map"></div>
+    
+    <div class="legend">
+        <h4>Legend</h4>
+        <div class="legend-item">
+            <div class="legend-color" style="background: rgba(255, 0, 0, 0.3);"></div>
+            <span>City Boundary</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: rgba(0, 0, 255, 0.3);"></div>
+            <span>Bounding Box</span>
+        </div>
+    </div>
+    
+    <div class="info-panel" id="info-panel">
+        <h3>Boundary Information</h3>
+        <div id="boundary-info"></div>
+    </div>
+    
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        class BoundaryVisualizer {
+            constructor() {
+                this.map = null;
+                this.boundaryLayer = null;
+                this.bboxLayer = null;
+                this.currentBoundary = null;
+                
+                this.init();
+            }
+            
+            init() {
+                this.initMap();
+                this.bindEvents();
+                this.loadSavedBoundaries();
+            }
+            
+            initMap() {
+                // Initialize map centered on San Francisco
+                this.map = L.map('map').setView([37.7749, -122.4194], 11);
+                
+                // Add tile layer
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors',
+                    maxZoom: 18
+                }).addTo(this.map);
+                
+                // Add scale control
+                L.control.scale().addTo(this.map);
+            }
+            
+            bindEvents() {
+                document.getElementById('boundary-select').addEventListener('change', (e) => {
+                    if (e.target.value) {
+                        this.loadBoundary(e.target.value);
+                    }
+                });
+                
+                document.getElementById('fetch-btn').addEventListener('click', () => {
+                    this.fetchNewBoundary();
+                });
+                
+                document.getElementById('file-input').addEventListener('change', (e) => {
+                    this.loadFromFile(e.target.files[0]);
+                });
+                
+                document.getElementById('clear-btn').addEventListener('click', () => {
+                    this.clearMap();
+                });
+            }
+            
+            async loadSavedBoundaries() {
+                try {
+                    const response = await fetch('../boundary/');
+                    if (response.ok) {
+                        const html = await response.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const links = doc.querySelectorAll('a[href$=".geojson"]');
+                        
+                        const select = document.getElementById('boundary-select');
+                        select.innerHTML = '<option value="">Select a boundary...</option>';
+                        
+                        links.forEach(link => {
+                            const filename = link.getAttribute('href');
+                            const name = filename.replace('.geojson', '').replace(/_/g, ' ');
+                            const option = document.createElement('option');
+                            option.value = filename;
+                            option.textContent = name;
+                            select.appendChild(option);
+                        });
+                    }
+                } catch (error) {
+                    console.warn('Could not load saved boundaries:', error);
+                    this.showMessage('Could not load saved boundaries. You can still upload files or fetch new boundaries.', 'error');
+                }
+            }
+            
+            async loadBoundary(filename) {
+                try {
+                    this.showLoading();
+                    const response = await fetch(`../boundary/${filename}`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const geojson = await response.json();
+                    this.displayBoundary(geojson, filename);
+                    this.showMessage(`Successfully loaded ${filename}`, 'success');
+                } catch (error) {
+                    this.showMessage(`Error loading boundary: ${error.message}`, 'error');
+                } finally {
+                    this.hideLoading();
+                }
+            }
+            
+            async fetchNewBoundary() {
+                const city = document.getElementById('city-input').value.trim();
+                const state = document.getElementById('state-input').value.trim().toUpperCase();
+                
+                if (!city || !state) {
+                    this.showMessage('Please enter both city and state', 'error');
+                    return;
+                }
+                
+                try {
+                    this.showLoading();
+                    this.showMessage('Fetching boundary data from OpenStreetMap...', 'info');
+                    
+                    // This would need to be implemented with a backend service
+                    // For now, show a message about manual fetching
+                    this.showMessage(
+                        `To fetch boundary for ${city}, ${state}, run: ` +
+                        `python city_boundary_fetcher.py "${city}" --state ${state}`, 
+                        'info'
+                    );
+                    
+                } catch (error) {
+                    this.showMessage(`Error fetching boundary: ${error.message}`, 'error');
+                } finally {
+                    this.hideLoading();
+                }
+            }
+            
+            loadFromFile(file) {
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const geojson = JSON.parse(e.target.result);
+                        this.displayBoundary(geojson, file.name);
+                        this.showMessage(`Successfully loaded ${file.name}`, 'success');
+                    } catch (error) {
+                        this.showMessage(`Error parsing file: ${error.message}`, 'error');
+                    }
+                };
+                reader.readAsText(file);
+            }
+            
+            displayBoundary(geojson, filename = 'boundary') {
+                this.clearMap();
+                
+                // Extract feature from FeatureCollection if needed
+                let feature = geojson;
+                if (geojson.type === 'FeatureCollection' && geojson.features.length > 0) {
+                    feature = geojson.features[0];
+                }
+                
+                // Store current boundary
+                this.currentBoundary = feature;
+                
+                // Add boundary to map
+                this.boundaryLayer = L.geoJSON(feature, {
+                    style: {
+                        color: '#ff0000',
+                        weight: 3,
+                        opacity: 0.8,
+                        fillColor: '#ff0000',
+                        fillOpacity: 0.2
+                    }
+                }).addTo(this.map);
+                
+                // Add bounding box if available
+                if (feature.properties && feature.properties.bbox) {
+                    const bbox = feature.properties.bbox;
+                    const bounds = [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]; // [south, west], [north, east]
+                    
+                    this.bboxLayer = L.rectangle(bounds, {
+                        color: '#0000ff',
+                        weight: 2,
+                        opacity: 0.6,
+                        fillColor: '#0000ff',
+                        fillOpacity: 0.1
+                    }).addTo(this.map);
+                }
+                
+                // Fit map to boundary
+                this.map.fitBounds(this.boundaryLayer.getBounds(), { padding: [20, 20] });
+                
+                // Show boundary information
+                this.showBoundaryInfo(feature, filename);
+            }
+            
+            showBoundaryInfo(feature, filename) {
+                const props = feature.properties || {};
+                const geometry = feature.geometry;
+                
+                let coordinateCount = 0;
+                let polygonCount = 0;
+                
+                if (geometry.type === 'Polygon') {
+                    polygonCount = 1;
+                    coordinateCount = geometry.coordinates[0].length;
+                } else if (geometry.type === 'MultiPolygon') {
+                    polygonCount = geometry.coordinates.length;
+                    coordinateCount = geometry.coordinates.reduce((sum, polygon) => 
+                        sum + polygon[0].length, 0
+                    );
+                }
+                
+                const info = document.getElementById('boundary-info');
+                info.innerHTML = `
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>File:</strong>
+                            ${filename}
+                        </div>
+                        <div class="info-item">
+                            <strong>City:</strong>
+                            ${props.name || 'Unknown'}
+                        </div>
+                        <div class="info-item">
+                            <strong>State:</strong>
+                            ${props.state || 'Unknown'}
+                        </div>
+                        <div class="info-item">
+                            <strong>OSM ID:</strong>
+                            ${props.osm_id || 'Unknown'}
+                        </div>
+                        <div class="info-item">
+                            <strong>OSM Type:</strong>
+                            ${props.osm_type || 'Unknown'}
+                        </div>
+                        <div class="info-item">
+                            <strong>Geometry Type:</strong>
+                            ${geometry.type}
+                        </div>
+                        <div class="info-item">
+                            <strong>Polygon Count:</strong>
+                            ${polygonCount}
+                        </div>
+                        <div class="info-item">
+                            <strong>Coordinate Points:</strong>
+                            ${coordinateCount}
+                        </div>
+                        <div class="info-item">
+                            <strong>Area:</strong>
+                            ${props.area_km2 ? `${props.area_km2.toFixed(2)} km²` : 'Unknown'}
+                        </div>
+                        <div class="info-item">
+                            <strong>Bounding Box:</strong>
+                            ${props.bbox ? `[${props.bbox.map(n => n.toFixed(4)).join(', ')}]` : 'Not available'}
+                        </div>
+                    </div>
+                `;
+                
+                document.getElementById('info-panel').classList.add('show');
+            }
+            
+            clearMap() {
+                if (this.boundaryLayer) {
+                    this.map.removeLayer(this.boundaryLayer);
+                    this.boundaryLayer = null;
+                }
+                
+                if (this.bboxLayer) {
+                    this.map.removeLayer(this.bboxLayer);
+                    this.bboxLayer = null;
+                }
+                
+                document.getElementById('info-panel').classList.remove('show');
+                this.currentBoundary = null;
+            }
+            
+            showMessage(message, type = 'info') {
+                const errorDiv = document.getElementById('error-message');
+                const successDiv = document.getElementById('success-message');
+                
+                // Hide both first
+                errorDiv.style.display = 'none';
+                successDiv.style.display = 'none';
+                
+                if (type === 'error') {
+                    errorDiv.textContent = message;
+                    errorDiv.style.display = 'block';
+                } else {
+                    successDiv.textContent = message;
+                    successDiv.style.display = 'block';
+                }
+                
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    errorDiv.style.display = 'none';
+                    successDiv.style.display = 'none';
+                }, 5000);
+            }
+            
+            showLoading() {
+                const button = document.getElementById('fetch-btn');
+                button.disabled = true;
+                button.innerHTML = '<div class="spinner"></div>Loading...';
+            }
+            
+            hideLoading() {
+                const button = document.getElementById('fetch-btn');
+                button.disabled = false;
+                button.innerHTML = 'Fetch Boundary';
+            }
+        }
+        
+        // Initialize the visualizer when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new BoundaryVisualizer();
+        });
+    </script>
+</body>
+</html> 

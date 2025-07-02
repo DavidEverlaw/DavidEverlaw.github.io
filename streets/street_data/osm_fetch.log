@@ -1,0 +1,1169 @@
+2025-06-30 19:52:42,715 - INFO - Fetching street data for San Francisco
+2025-06-30 19:52:42,715 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-06-30 19:52:44,952 - INFO - Successfully fetched 12632 elements
+2025-06-30 19:52:49,617 - INFO - Found 1873 unique street names
+2025-06-30 19:52:49,627 - INFO - Processed 1976 street segments
+2025-06-30 19:52:49,760 - INFO - Saved 1976 streets to data/san-francisco_streets.json
+2025-06-30 19:52:49,760 - INFO - Total miles: 1094.54
+2025-06-30 20:02:37,502 - INFO - Fetching street data for San Francisco
+2025-06-30 20:02:37,502 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-06-30 20:02:37,503 - DEBUG - Starting new HTTPS connection (1): overpass-api.de:443
+2025-06-30 20:02:38,560 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 200 None
+2025-06-30 20:02:39,993 - INFO - Successfully fetched 12632 elements
+2025-06-30 20:02:45,008 - INFO - Found 1849 unique street names
+2025-06-30 20:02:45,019 - INFO - Processed 1959 street segments
+2025-06-30 20:02:45,151 - INFO - Saved 1959 streets to data/san-francisco_streets.json
+2025-06-30 20:02:45,151 - INFO - Total miles: 1094.54
+2025-06-30 20:12:45,377 - INFO - Fetching street data for San Francisco
+2025-06-30 20:12:45,377 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-06-30 20:12:47,705 - INFO - Successfully fetched 12632 elements
+2025-06-30 20:12:52,939 - INFO - Found 1873 unique street names
+2025-06-30 20:12:52,950 - INFO - Processed 1976 street segments
+2025-06-30 20:12:53,096 - INFO - Saved 1976 streets to data/san-francisco_streets.json
+2025-06-30 20:12:53,097 - INFO - Total miles: 1094.54
+2025-07-01 09:42:27,037 - INFO - Fetching street data for San Francisco
+2025-07-01 09:42:27,037 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 09:42:27,037 - DEBUG - Starting new HTTPS connection (1): overpass-api.de:443
+2025-07-01 09:42:30,402 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 200 None
+2025-07-01 09:42:33,809 - INFO - Successfully fetched 140196 elements
+2025-07-01 09:42:42,735 - INFO - Found 1873 unique street names
+2025-07-01 09:42:42,736 - INFO - Processed 6 MultiLineString streets
+2025-07-01 09:42:42,737 - INFO - Processed 10394 single LineString streets
+2025-07-01 09:42:42,749 - INFO - Processed 1976 street segments
+2025-07-01 09:42:43,508 - INFO - Saved 1976 streets to data/san-francisco_streets.json
+2025-07-01 09:42:43,508 - INFO - Total miles: 2704.6
+2025-07-01 10:19:08,100 - INFO - Fetching street data for San Francisco
+2025-07-01 10:19:08,100 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 10:19:14,944 - INFO - Successfully fetched 140196 elements
+2025-07-01 10:19:23,728 - INFO - Found 1873 unique street names
+2025-07-01 10:19:23,729 - INFO - Processed 6 MultiLineString streets
+2025-07-01 10:19:23,730 - INFO - Processed 10394 single LineString streets
+2025-07-01 10:19:23,740 - INFO - Processed 1976 street segments
+2025-07-01 10:19:24,428 - INFO - Saved 1976 streets to data/san-francisco_streets.json
+2025-07-01 10:19:24,428 - INFO - Total miles: 2704.6
+2025-07-01 10:25:36,130 - INFO - Fetching streets for city: San Francisco, CA
+2025-07-01 10:25:36,130 - INFO - Fetching street data for San Francisco, CA
+2025-07-01 10:25:36,130 - INFO - Fetching boundary for San Francisco, CA, United States
+2025-07-01 10:25:37,330 - INFO - Successfully fetched boundary for San Francisco
+2025-07-01 10:25:37,330 - INFO - Area: 341.62 km²
+2025-07-01 10:25:37,330 - INFO - Bounding box: [37.6403143, -123.173825, 37.9296678, -122.2814578]
+2025-07-01 10:25:37,334 - INFO - Saved boundary to boundary/san_francisco_ca.geojson
+2025-07-01 10:25:37,334 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 10:25:37,334 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 10:25:37,844 - WARNING - Attempt 1 failed: 400 Client Error: Bad Request for url: https://overpass-api.de/api/interpreter
+2025-07-01 10:25:37,844 - INFO - Waiting 1 seconds before retry...
+2025-07-01 10:25:38,846 - INFO - Fetching data from Overpass API (attempt 2/3)
+2025-07-01 10:25:39,365 - WARNING - Attempt 2 failed: 400 Client Error: Bad Request for url: https://overpass-api.de/api/interpreter
+2025-07-01 10:25:39,365 - INFO - Waiting 2 seconds before retry...
+2025-07-01 10:25:41,367 - INFO - Fetching data from Overpass API (attempt 3/3)
+2025-07-01 10:25:41,885 - WARNING - Attempt 3 failed: 400 Client Error: Bad Request for url: https://overpass-api.de/api/interpreter
+2025-07-01 10:25:41,885 - ERROR - Error: 400 Client Error: Bad Request for url: https://overpass-api.de/api/interpreter
+2025-07-01 10:27:36,006 - INFO - Fetching streets for city: San Francisco, CA
+2025-07-01 10:27:36,006 - INFO - Fetching street data for San Francisco, CA
+2025-07-01 10:27:36,007 - INFO - Fetching boundary for San Francisco, CA, United States
+2025-07-01 10:27:37,201 - INFO - Successfully fetched boundary for San Francisco
+2025-07-01 10:27:37,202 - INFO - Area: 341.62 km²
+2025-07-01 10:27:37,202 - INFO - Bounding box: [37.6403143, -123.173825, 37.9296678, -122.2814578]
+2025-07-01 10:27:37,204 - INFO - Saved boundary to boundary/san_francisco_ca.geojson
+2025-07-01 10:27:37,204 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 10:27:37,205 - INFO - Using bounding box for Overpass query: 37.6403,-123.1738,37.9297,-122.2815
+2025-07-01 10:27:37,205 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 10:27:43,771 - INFO - Successfully fetched 227394 elements
+2025-07-01 10:27:58,059 - INFO - Found 3751 unique street names
+2025-07-01 10:27:58,061 - INFO - Processed 6 MultiLineString streets
+2025-07-01 10:27:58,064 - INFO - Processed 19912 single LineString streets
+2025-07-01 10:27:58,099 - WARNING - Error filtering streets by boundary: TopologyException: side location conflict at -122.4051391 37.708247999999998. This can occur if the input geometry is invalid.
+2025-07-01 10:27:58,099 - WARNING - Returning all streets without boundary filtering
+2025-07-01 10:27:58,099 - INFO - Filtered to 4777 streets within city boundary
+2025-07-01 10:27:58,099 - INFO - Processed 4777 street segments for San Francisco
+2025-07-01 10:27:59,270 - INFO - Saved 4777 streets to data/san_francisco_ca_streets.json
+2025-07-01 10:27:59,270 - INFO - Total miles: 3870.13
+2025-07-01 10:59:44,521 - INFO - Fetching street data for San Francisco, CA
+2025-07-01 10:59:44,521 - INFO - Fetching boundary for San Francisco, CA
+2025-07-01 10:59:44,701 - INFO - Successfully fetched boundary for San Francisco
+2025-07-01 10:59:44,701 - INFO - Area: 756.61 km²
+2025-07-01 10:59:44,701 - INFO - Bounding box: [37.63983, -123.173825, 37.929824, -122.28178]
+2025-07-01 10:59:44,711 - INFO - Saved boundary to boundary/san_francisco_ca.geojson
+2025-07-01 10:59:44,712 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 10:59:44,712 - INFO - Using bounding box for Overpass query: 37.6398,-123.1738,37.9298,-122.2818
+2025-07-01 10:59:44,712 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 10:59:52,613 - INFO - Successfully fetched 227346 elements
+2025-07-01 11:00:07,325 - INFO - Found 3750 unique street names
+2025-07-01 11:00:07,328 - INFO - Processed 6 MultiLineString streets
+2025-07-01 11:00:07,330 - INFO - Processed 19905 single LineString streets
+2025-07-01 11:00:07,853 - INFO - Filtered 4776 streets to 1959 within boundary
+2025-07-01 11:00:07,858 - INFO - Filtered to 1959 streets within city boundary
+2025-07-01 11:00:07,858 - INFO - Processed 1959 street segments for San Francisco
+2025-07-01 11:00:08,700 - INFO - Saved 1959 streets to data/san_francisco_ca_streets.json
+2025-07-01 11:00:08,700 - INFO - Total miles: 2890.51
+2025-07-01 11:00:08,707 - INFO - Fetching street data for Berkeley, CA
+2025-07-01 11:00:08,708 - INFO - Fetching boundary for Berkeley, CA
+2025-07-01 11:00:08,867 - INFO - Successfully fetched boundary for Berkeley
+2025-07-01 11:00:08,868 - INFO - Area: 57.83 km²
+2025-07-01 11:00:08,868 - INFO - Bounding box: [37.835727, -122.367781, 37.905824, -122.234179]
+2025-07-01 11:00:08,875 - INFO - Saved boundary to boundary/berkeley_ca.geojson
+2025-07-01 11:00:08,875 - INFO - Using city boundary polygon (Polygon)
+2025-07-01 11:00:08,876 - INFO - Using bounding box for Overpass query: 37.8357,-122.3678,37.9058,-122.2342
+2025-07-01 11:00:08,876 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 11:00:12,386 - INFO - Successfully fetched 32440 elements
+2025-07-01 11:00:14,486 - INFO - Found 650 unique street names
+2025-07-01 11:00:14,487 - INFO - Processed 0 MultiLineString streets
+2025-07-01 11:00:14,488 - INFO - Processed 4086 single LineString streets
+2025-07-01 11:00:14,641 - INFO - Filtered 718 streets to 439 within boundary
+2025-07-01 11:00:14,642 - INFO - Filtered to 439 streets within city boundary
+2025-07-01 11:00:14,642 - INFO - Processed 439 street segments for Berkeley
+2025-07-01 11:00:14,773 - INFO - Saved 439 streets to data/berkeley_ca_streets.json
+2025-07-01 11:00:14,774 - INFO - Total miles: 304.58
+2025-07-01 11:00:14,775 - INFO - Fetching street data for Oakland, CA
+2025-07-01 11:00:14,775 - INFO - Fetching boundary for Oakland, CA
+2025-07-01 11:00:14,989 - INFO - Successfully fetched boundary for Oakland
+2025-07-01 11:00:14,989 - INFO - Area: 254.16 km²
+2025-07-01 11:00:14,989 - INFO - Bounding box: [37.631714, -122.355881, 37.885438, -122.114793]
+2025-07-01 11:00:14,995 - INFO - Saved boundary to boundary/oakland_ca.geojson
+2025-07-01 11:00:14,995 - INFO - Using city boundary polygon (Polygon)
+2025-07-01 11:00:14,996 - INFO - Using bounding box for Overpass query: 37.6317,-122.3559,37.8854,-122.1148
+2025-07-01 11:00:14,996 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 11:00:19,389 - INFO - Successfully fetched 132697 elements
+2025-07-01 11:00:27,739 - INFO - Found 3738 unique street names
+2025-07-01 11:00:27,741 - INFO - Processed 2 MultiLineString streets
+2025-07-01 11:00:27,743 - INFO - Processed 17267 single LineString streets
+2025-07-01 11:00:29,716 - INFO - Filtered 4659 streets to 2059 within boundary
+2025-07-01 11:00:29,721 - INFO - Filtered to 2059 streets within city boundary
+2025-07-01 11:00:29,721 - INFO - Processed 2059 street segments for Oakland
+2025-07-01 11:00:30,163 - INFO - Saved 2059 streets to data/oakland_ca_streets.json
+2025-07-01 11:00:30,163 - INFO - Total miles: 1142.34
+2025-07-01 11:00:30,179 - INFO - Fetching street data for San Francisco
+2025-07-01 11:00:30,179 - INFO - Loaded boundary from boundary/san_francisco_ca.geojson
+2025-07-01 11:00:30,179 - INFO - Loaded existing boundary for San Francisco
+2025-07-01 11:00:30,179 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 11:00:30,180 - INFO - Using bounding box for Overpass query: 37.6398,-123.1738,37.9298,-122.2818
+2025-07-01 11:00:30,180 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 11:00:38,516 - INFO - Successfully fetched 227346 elements
+2025-07-01 11:00:53,404 - INFO - Found 3750 unique street names
+2025-07-01 11:00:53,407 - INFO - Processed 6 MultiLineString streets
+2025-07-01 11:00:53,409 - INFO - Processed 19905 single LineString streets
+2025-07-01 11:00:53,938 - INFO - Filtered 4776 streets to 1959 within boundary
+2025-07-01 11:00:53,943 - INFO - Filtered to 1959 streets within city boundary
+2025-07-01 11:00:53,944 - INFO - Processed 1959 street segments
+2025-07-01 11:00:53,980 - INFO - Fetching street data for San Francisco, CA
+2025-07-01 11:00:53,981 - INFO - Fetching boundary for San Francisco, CA
+2025-07-01 11:00:54,009 - INFO - Successfully fetched boundary for San Francisco
+2025-07-01 11:00:54,009 - INFO - Area: 756.61 km²
+2025-07-01 11:00:54,009 - INFO - Bounding box: [37.63983, -123.173825, 37.929824, -122.28178]
+2025-07-01 11:00:54,011 - INFO - Saved boundary to boundary/san_francisco_ca.geojson
+2025-07-01 11:00:54,011 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 11:00:54,011 - INFO - Using bounding box for Overpass query: 37.6398,-123.1738,37.9298,-122.2818
+2025-07-01 11:00:54,011 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 11:01:01,238 - INFO - Successfully fetched 227346 elements
+2025-07-01 11:01:16,496 - INFO - Found 3750 unique street names
+2025-07-01 11:01:16,498 - INFO - Processed 6 MultiLineString streets
+2025-07-01 11:01:16,500 - INFO - Processed 19905 single LineString streets
+2025-07-01 11:01:17,053 - INFO - Filtered 4776 streets to 1959 within boundary
+2025-07-01 11:01:17,059 - INFO - Filtered to 1959 streets within city boundary
+2025-07-01 11:01:17,059 - INFO - Processed 1959 street segments for San Francisco
+2025-07-01 11:30:42,188 - INFO - Fetching streets for city: Berkeley, CA
+2025-07-01 11:30:42,189 - INFO - Fetching street data for Berkeley, CA
+2025-07-01 11:30:42,189 - INFO - Fetching boundary for Berkeley, CA
+2025-07-01 11:30:42,189 - DEBUG - Fetching from URL: https://raw.githubusercontent.com/generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/berkeley.json
+2025-07-01 11:30:42,190 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-07-01 11:30:42,380 - DEBUG - https://raw.githubusercontent.com:443 "GET /generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/berkeley.json HTTP/1.1" 200 7842
+2025-07-01 11:30:42,384 - INFO - Successfully fetched boundary for Berkeley
+2025-07-01 11:30:42,384 - INFO - Area: 57.83 km²
+2025-07-01 11:30:42,384 - INFO - Bounding box: [37.835727, -122.367781, 37.905824, -122.234179]
+2025-07-01 11:30:42,387 - INFO - Saved boundary to boundary/berkeley_ca.geojson
+2025-07-01 11:30:42,388 - INFO - Using city boundary polygon (Polygon)
+2025-07-01 11:30:42,388 - INFO - Using bounding box for Overpass query: 37.8357,-122.3678,37.9058,-122.2342
+2025-07-01 11:30:42,388 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 11:30:42,389 - DEBUG - Starting new HTTPS connection (1): overpass-api.de:443
+2025-07-01 11:30:47,186 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 200 None
+2025-07-01 11:30:52,656 - INFO - Successfully fetched 118213 elements
+2025-07-01 11:31:07,633 - INFO - Found 933 unique street names
+2025-07-01 11:31:07,634 - INFO - Processed 135 MultiLineString streets
+2025-07-01 11:31:07,634 - INFO - Processed 3378 single LineString streets
+2025-07-01 11:31:10,116 - INFO - Filtered 1014 streets to 654 within boundary
+2025-07-01 11:31:10,117 - INFO - Filtered to 654 streets within city boundary
+2025-07-01 11:31:10,117 - INFO - Processed 654 street segments for Berkeley
+2025-07-01 11:31:11,352 - INFO - Saved 654 streets to data/berkeley_ca_streets.json
+2025-07-01 11:31:11,352 - INFO - Total miles: 6524.59
+2025-07-01 11:45:30,988 - INFO - Fetching streets for city: Berkeley, CA
+2025-07-01 11:45:30,989 - INFO - Fetching street data for Berkeley, CA
+2025-07-01 11:45:30,989 - INFO - Fetching boundary for Berkeley, CA
+2025-07-01 11:45:30,989 - DEBUG - Fetching from URL: https://raw.githubusercontent.com/generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/berkeley.json
+2025-07-01 11:45:30,991 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-07-01 11:45:31,205 - DEBUG - https://raw.githubusercontent.com:443 "GET /generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/berkeley.json HTTP/1.1" 200 7842
+2025-07-01 11:45:31,212 - INFO - Successfully fetched boundary for Berkeley
+2025-07-01 11:45:31,212 - INFO - Area: 57.83 km²
+2025-07-01 11:45:31,212 - INFO - Bounding box: [37.835727, -122.367781, 37.905824, -122.234179]
+2025-07-01 11:45:31,217 - INFO - Saved boundary to boundary/berkeley_ca.geojson
+2025-07-01 11:45:31,217 - INFO - Using city boundary polygon (Polygon)
+2025-07-01 11:45:31,218 - INFO - Using bounding box for Overpass query: 37.8357,-122.3678,37.9058,-122.2342
+2025-07-01 11:45:31,218 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 11:45:31,218 - DEBUG - Starting new HTTPS connection (1): overpass-api.de:443
+2025-07-01 11:45:32,403 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 200 None
+2025-07-01 11:45:33,659 - INFO - Successfully fetched 44249 elements
+2025-07-01 11:45:36,650 - INFO - Found 846 unique street names
+2025-07-01 11:45:36,650 - INFO - Processed 28 MultiLineString streets
+2025-07-01 11:45:36,651 - INFO - Processed 4670 single LineString streets
+2025-07-01 11:45:37,576 - INFO - Filtered 931 streets to 577 within boundary
+2025-07-01 11:45:37,577 - INFO - Filtered to 577 streets within city boundary
+2025-07-01 11:45:37,577 - INFO - Processed 577 street segments for Berkeley
+2025-07-01 11:45:37,740 - INFO - Saved 577 streets to data/berkeley_ca_streets.json
+2025-07-01 11:45:37,740 - INFO - Total miles: 375.38
+2025-07-01 11:45:52,248 - INFO - Fetching streets for city: San Francisco, CA
+2025-07-01 11:45:52,249 - INFO - Fetching street data for San Francisco, CA
+2025-07-01 11:45:52,249 - INFO - Fetching boundary for San Francisco, CA
+2025-07-01 11:45:52,249 - DEBUG - Fetching from URL: https://raw.githubusercontent.com/generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/san-francisco.json
+2025-07-01 11:45:52,251 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-07-01 11:45:52,419 - DEBUG - https://raw.githubusercontent.com:443 "GET /generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/san-francisco.json HTTP/1.1" 200 3637
+2025-07-01 11:45:52,422 - INFO - Successfully fetched boundary for San Francisco
+2025-07-01 11:45:52,422 - INFO - Area: 756.61 km²
+2025-07-01 11:45:52,422 - INFO - Bounding box: [37.63983, -123.173825, 37.929824, -122.28178]
+2025-07-01 11:45:52,427 - INFO - Saved boundary to boundary/san_francisco_ca.geojson
+2025-07-01 11:45:52,427 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 11:45:52,427 - INFO - Using bounding box for Overpass query: 37.6398,-123.1738,37.9298,-122.2818
+2025-07-01 11:45:52,427 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 11:45:52,428 - DEBUG - Starting new HTTPS connection (1): overpass-api.de:443
+2025-07-01 11:45:56,901 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 200 None
+2025-07-01 11:46:01,302 - INFO - Successfully fetched 275445 elements
+2025-07-01 11:46:02,916 - DEBUG - Skipping long route: 1 (Las Cruces - San Francisco) (439.17 miles)
+2025-07-01 11:46:03,906 - DEBUG - Skipping long route: 1 (San Francisco - Leggett) (223.16 miles)
+2025-07-01 11:46:06,440 - DEBUG - Skipping long route: El Camino Real (944.28 miles)
+2025-07-01 11:46:21,481 - INFO - Found 4659 unique street names
+2025-07-01 11:46:21,484 - INFO - Processed 62 MultiLineString streets
+2025-07-01 11:46:21,487 - INFO - Processed 22262 single LineString streets
+2025-07-01 11:46:23,432 - INFO - Filtered 5808 streets to 2500 within boundary
+2025-07-01 11:46:23,438 - INFO - Filtered to 2500 streets within city boundary
+2025-07-01 11:46:23,439 - INFO - Processed 2500 street segments for San Francisco
+2025-07-01 11:46:24,144 - INFO - Saved 2500 streets to data/san_francisco_ca_streets.json
+2025-07-01 11:46:24,144 - INFO - Total miles: 1455.26
+2025-07-01 11:48:58,643 - INFO - Fetching streets for city: Seattle, WA
+2025-07-01 11:48:58,644 - INFO - Fetching street data for Seattle, WA
+2025-07-01 11:48:58,644 - INFO - Fetching boundary for Seattle, WA
+2025-07-01 11:48:58,849 - INFO - Successfully fetched boundary for Seattle
+2025-07-01 11:48:58,849 - INFO - Area: 542.44 km²
+2025-07-01 11:48:58,849 - INFO - Bounding box: [47.48215, -122.459774, 47.73528, -122.219822]
+2025-07-01 11:48:58,852 - INFO - Saved boundary to boundary/seattle_wa.geojson
+2025-07-01 11:48:58,852 - INFO - Using city boundary polygon (Polygon)
+2025-07-01 11:48:58,853 - INFO - Using bounding box for Overpass query: 47.4821,-122.4598,47.7353,-122.2198
+2025-07-01 11:48:58,853 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 11:49:08,705 - INFO - Successfully fetched 187884 elements
+2025-07-01 11:49:23,255 - INFO - Found 3079 unique street names
+2025-07-01 11:49:23,258 - INFO - Processed 22 MultiLineString streets
+2025-07-01 11:49:23,261 - INFO - Processed 21413 single LineString streets
+2025-07-01 11:49:26,874 - INFO - Filtered 3359 streets to 2587 within boundary
+2025-07-01 11:49:26,877 - INFO - Filtered to 2587 streets within city boundary
+2025-07-01 11:49:26,877 - INFO - Processed 2587 street segments for Seattle
+2025-07-01 11:49:27,826 - INFO - Saved 2587 streets to data/seattle_wa_streets.json
+2025-07-01 11:49:27,826 - INFO - Total miles: 2212.26
+2025-07-01 11:54:22,831 - INFO - Fetching streets for city: San Francisco, CA
+2025-07-01 11:54:22,832 - INFO - Fetching street data for San Francisco, CA
+2025-07-01 11:54:22,832 - INFO - Fetching boundary for San Francisco, CA
+2025-07-01 11:54:23,065 - INFO - Successfully fetched boundary for San Francisco
+2025-07-01 11:54:23,065 - INFO - Area: 756.61 km²
+2025-07-01 11:54:23,065 - INFO - Bounding box: [37.63983, -123.173825, 37.929824, -122.28178]
+2025-07-01 11:54:23,066 - INFO - Saved boundary to boundary/san_francisco_ca.geojson
+2025-07-01 11:54:23,066 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 11:54:23,067 - INFO - Using bounding box for Overpass query: 37.6398,-123.1738,37.9298,-122.2818
+2025-07-01 11:54:23,067 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 11:54:32,749 - INFO - Successfully fetched 275445 elements
+2025-07-01 11:54:50,362 - INFO - Found 4659 unique street names
+2025-07-01 11:54:50,365 - INFO - Processed 62 MultiLineString streets
+2025-07-01 11:54:50,367 - INFO - Processed 22262 single LineString streets
+2025-07-01 11:54:52,108 - INFO - Filtered 5808 streets to 2500 within boundary
+2025-07-01 11:54:52,114 - INFO - Filtered to 2500 streets within city boundary
+2025-07-01 11:54:52,114 - INFO - Processed 2500 street segments for San Francisco
+2025-07-01 11:54:52,725 - INFO - Saved 2500 streets to data/san_francisco_ca_streets.json
+2025-07-01 11:54:52,725 - INFO - Total miles: 1455.26
+2025-07-01 12:01:50,615 - INFO - Fetching streets for city: Seattle, WA
+2025-07-01 12:01:50,616 - INFO - Fetching street data for Seattle, WA
+2025-07-01 12:01:50,616 - INFO - Fetching boundary for Seattle, WA
+2025-07-01 12:01:50,616 - DEBUG - Fetching from URL: https://raw.githubusercontent.com/generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/wa/seattle.json
+2025-07-01 12:01:50,618 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-07-01 12:01:50,844 - DEBUG - https://raw.githubusercontent.com:443 "GET /generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/wa/seattle.json HTTP/1.1" 200 6867
+2025-07-01 12:01:50,849 - INFO - Successfully fetched boundary for Seattle
+2025-07-01 12:01:50,849 - INFO - Area: 542.44 km²
+2025-07-01 12:01:50,849 - INFO - Bounding box: [47.48215, -122.459774, 47.73528, -122.219822]
+2025-07-01 12:01:50,852 - INFO - Saved boundary to boundary/seattle_wa.geojson
+2025-07-01 12:01:50,852 - INFO - Using city boundary polygon (Polygon)
+2025-07-01 12:01:50,852 - INFO - Using bounding box for Overpass query: 47.4821,-122.4598,47.7353,-122.2198
+2025-07-01 12:01:50,852 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 12:01:50,853 - DEBUG - Starting new HTTPS connection (1): overpass-api.de:443
+2025-07-01 12:01:52,796 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 200 None
+2025-07-01 12:01:55,172 - INFO - Successfully fetched 133014 elements
+2025-07-01 12:01:55,283 - DEBUG - Skipping highway/freeway: South Sunny View Drive
+2025-07-01 12:01:55,406 - DEBUG - Skipping highway/freeway: Sturgus Avenue South
+2025-07-01 12:01:55,486 - DEBUG - Skipping highway/freeway: East Denny Blaine Place
+2025-07-01 12:01:55,664 - DEBUG - Skipping highway/freeway: Lotus Place South
+2025-07-01 12:01:55,986 - DEBUG - Skipping highway/freeway: South Kenny Street
+2025-07-01 12:01:55,986 - DEBUG - Skipping highway/freeway: South Kenny Street
+2025-07-01 12:01:56,251 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:01:56,251 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:01:56,251 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:01:56,300 - DEBUG - Skipping highway/freeway: Ithaca Place South
+2025-07-01 12:01:56,584 - DEBUG - Skipping highway/freeway: Seneca Avenue Northwest
+2025-07-01 12:01:56,584 - DEBUG - Skipping highway/freeway: Seneca Avenue Northwest
+2025-07-01 12:01:56,850 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:01:56,938 - DEBUG - Skipping highway/freeway: Sunset Highway
+2025-07-01 12:01:57,187 - DEBUG - Skipping highway/freeway: South Kenny Street
+2025-07-01 12:01:57,306 - DEBUG - Skipping highway/freeway: Cyrus Avenue Northwest
+2025-07-01 12:01:57,405 - DEBUG - Skipping highway/freeway: South Americus Street
+2025-07-01 12:01:57,405 - DEBUG - Skipping highway/freeway: South Americus Street
+2025-07-01 12:01:57,430 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:01:57,430 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:01:57,569 - DEBUG - Skipping highway/freeway: Wabash Avenue South
+2025-07-01 12:01:57,661 - DEBUG - Skipping highway/freeway: Seneca Court Northwest
+2025-07-01 12:01:57,836 - DEBUG - Skipping highway/freeway: Pontius Avenue North
+2025-07-01 12:01:57,854 - DEBUG - Skipping highway/freeway: Marcus Avenue South
+2025-07-01 12:01:57,872 - DEBUG - Skipping highway/freeway: Dravus Street
+2025-07-01 12:01:57,885 - DEBUG - Skipping highway/freeway: East Seneca Street
+2025-07-01 12:01:57,948 - DEBUG - Skipping highway/freeway: Lenny Wilkens Way
+2025-07-01 12:01:58,315 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:01:58,390 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:01:58,390 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:01:58,567 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:01:58,570 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:01:58,570 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:01:58,570 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:01:58,583 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:01:58,613 - DEBUG - Skipping highway/freeway: South Bush Place
+2025-07-01 12:01:58,620 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:01:58,793 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:01:58,802 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:01:58,856 - DEBUG - Skipping highway/freeway: East Duwamish Waterway Bridge
+2025-07-01 12:01:58,881 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:01:58,960 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:01:58,961 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:01:58,989 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:01:59,071 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:01:59,105 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:01:59,606 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:01:59,629 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:01:59,882 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:01:59,893 - DEBUG - Skipping highway/freeway: Denny Way
+2025-07-01 12:01:59,909 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:01:59,916 - DEBUG - Skipping highway/freeway: South Kenny Street
+2025-07-01 12:01:59,946 - DEBUG - Skipping highway/freeway: Denny Way
+2025-07-01 12:02:00,002 - DEBUG - Skipping highway/freeway: Scenic Drive
+2025-07-01 12:02:00,047 - DEBUG - Skipping highway/freeway: Seneca Place Northwest
+2025-07-01 12:02:00,047 - DEBUG - Skipping highway/freeway: Seneca Place Northwest
+2025-07-01 12:02:00,130 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:00,153 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:02:00,171 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:00,408 - DEBUG - Skipping highway/freeway: Marcus Avenue South
+2025-07-01 12:02:00,452 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:02:00,496 - DEBUG - Skipping highway/freeway: Iowa Street
+2025-07-01 12:02:00,527 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:00,538 - DEBUG - Skipping highway/freeway: Sturgus Avenue South
+2025-07-01 12:02:00,541 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:02:00,541 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:02:00,564 - DEBUG - Skipping highway/freeway: Duwamish Avenue South
+2025-07-01 12:02:00,594 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:00,664 - DEBUG - Skipping highway/freeway: South Bush Place
+2025-07-01 12:02:00,687 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:00,687 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:00,721 - DEBUG - Skipping highway/freeway: Denny Way
+2025-07-01 12:02:00,721 - DEBUG - Skipping highway/freeway: Denny Way
+2025-07-01 12:02:00,731 - DEBUG - Skipping highway/freeway: Duwamish Avenue South
+2025-07-01 12:02:00,731 - DEBUG - Skipping highway/freeway: Duwamish Avenue South
+2025-07-01 12:02:00,733 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:02:00,909 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:00,909 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:00,909 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:00,932 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:02:00,944 - DEBUG - Skipping highway/freeway: Iowa Street
+2025-07-01 12:02:00,965 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:02:00,965 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:02:00,978 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:00,978 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:01,215 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:02:01,295 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:01,327 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:01,431 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:01,431 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:01,449 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:01,483 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:01,510 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:01,598 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:01,634 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:01,638 - DEBUG - Skipping highway/freeway: Pontius Avenue North
+2025-07-01 12:02:01,638 - DEBUG - Skipping highway/freeway: Pontius Avenue North
+2025-07-01 12:02:01,640 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:01,661 - DEBUG - Skipping highway/freeway: Pontius Avenue North
+2025-07-01 12:02:01,783 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:01,797 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:01,807 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:01,813 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:01,813 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:01,890 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:01,964 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:02:01,996 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:02,010 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:02:02,010 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:02:02,066 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:02,096 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:02,129 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:02,160 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:02,162 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:02,174 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:02:02,207 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:02,272 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:02,326 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:02,613 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:02,614 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:02,621 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:02,633 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:02,639 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:02,647 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:02,712 - DEBUG - Skipping highway/freeway: Sturgus Avenue South
+2025-07-01 12:02:02,712 - DEBUG - Skipping highway/freeway: Sturgus Avenue South
+2025-07-01 12:02:02,757 - DEBUG - Skipping highway/freeway: South Kenny Street
+2025-07-01 12:02:02,763 - DEBUG - Skipping highway/freeway: Wabash Avenue South
+2025-07-01 12:02:02,771 - DEBUG - Skipping highway/freeway: South Sunny View Drive
+2025-07-01 12:02:02,945 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:03,296 - DEBUG - Skipping highway/freeway: West Dravus Street
+2025-07-01 12:02:03,353 - DEBUG - Skipping highway/freeway: East Duwamish Waterway Bridge
+2025-07-01 12:02:03,373 - DEBUG - Skipping highway/freeway: East Denny Way
+2025-07-01 12:02:03,392 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:03,399 - DEBUG - Skipping highway/freeway: Seneca Street
+2025-07-01 12:02:03,498 - DEBUG - Skipping highway/freeway: East Seneca Street
+2025-07-01 12:02:03,634 - DEBUG - Skipping highway/freeway: East Denny Blaine Place
+2025-07-01 12:02:03,634 - DEBUG - Skipping highway/freeway: East Denny Blaine Place
+2025-07-01 12:02:03,678 - DEBUG - Skipping highway/freeway: Northeast Campus Parkway
+2025-07-01 12:02:03,688 - DEBUG - Skipping highway/freeway: Denny Way
+2025-07-01 12:02:03,689 - DEBUG - Skipping highway/freeway: Anthony Place South
+2025-07-01 12:02:03,691 - DEBUG - Skipping highway/freeway: Denny Way
+2025-07-01 12:02:03,694 - INFO - Found 2520 unique street names
+2025-07-01 12:02:03,696 - INFO - Processed 2 MultiLineString streets
+2025-07-01 12:02:03,699 - INFO - Processed 17994 single LineString streets
+2025-07-01 12:02:06,283 - INFO - Filtered 2779 streets to 2099 within boundary
+2025-07-01 12:02:06,284 - INFO - Filtered to 2099 streets within city boundary
+2025-07-01 12:02:06,284 - INFO - Processed 2099 street segments for Seattle
+2025-07-01 12:02:06,883 - INFO - Saved 2099 streets to data/seattle_wa_streets.json
+2025-07-01 12:02:06,883 - INFO - Total miles: 1777.39
+2025-07-01 12:03:23,839 - INFO - Fetching streets for city: San Francisco, CA
+2025-07-01 12:03:23,840 - INFO - Fetching street data for San Francisco, CA
+2025-07-01 12:03:23,841 - INFO - Fetching boundary for San Francisco, CA
+2025-07-01 12:03:23,841 - DEBUG - Fetching from URL: https://raw.githubusercontent.com/generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/san-francisco.json
+2025-07-01 12:03:23,843 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-07-01 12:03:24,025 - DEBUG - https://raw.githubusercontent.com:443 "GET /generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/san-francisco.json HTTP/1.1" 200 3637
+2025-07-01 12:03:24,026 - INFO - Successfully fetched boundary for San Francisco
+2025-07-01 12:03:24,026 - INFO - Area: 756.61 km²
+2025-07-01 12:03:24,026 - INFO - Bounding box: [37.63983, -123.173825, 37.929824, -122.28178]
+2025-07-01 12:03:24,028 - INFO - Saved boundary to boundary/san_francisco_ca.geojson
+2025-07-01 12:03:24,028 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 12:03:24,028 - INFO - Using bounding box for Overpass query: 37.6398,-123.1738,37.9298,-122.2818
+2025-07-01 12:03:24,028 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 12:03:24,028 - DEBUG - Starting new HTTPS connection (1): overpass-api.de:443
+2025-07-01 12:03:26,276 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 200 None
+2025-07-01 12:03:28,919 - INFO - Successfully fetched 158968 elements
+2025-07-01 12:03:29,036 - DEBUG - Skipping highway/freeway: Shoreline Highway
+2025-07-01 12:03:29,489 - DEBUG - Skipping highway/freeway: Brush Street
+2025-07-01 12:03:29,489 - DEBUG - Skipping highway/freeway: Brush Street
+2025-07-01 12:03:29,508 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:29,906 - DEBUG - Skipping highway/freeway: Welsh Street
+2025-07-01 12:03:29,906 - DEBUG - Skipping highway/freeway: Welsh Street
+2025-07-01 12:03:30,145 - DEBUG - Skipping highway/freeway: English Street
+2025-07-01 12:03:30,255 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:30,257 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:30,257 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:03:30,257 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:30,262 - DEBUG - Skipping highway/freeway: Ash Street
+2025-07-01 12:03:30,287 - DEBUG - Skipping highway/freeway: Bill Walsh Way
+2025-07-01 12:03:30,324 - DEBUG - Skipping highway/freeway: Wabash Terrace
+2025-07-01 12:03:30,511 - DEBUG - Skipping highway/freeway: Brush Place
+2025-07-01 12:03:30,706 - DEBUG - Skipping highway/freeway: Hunters Point Expressway
+2025-07-01 12:03:31,525 - DEBUG - Skipping highway/freeway: Ash Avenue
+2025-07-01 12:03:31,816 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:31,891 - DEBUG - Skipping highway/freeway: Spanish Trail Road
+2025-07-01 12:03:31,986 - DEBUG - Skipping highway/freeway: Marsh Drive
+2025-07-01 12:03:31,986 - DEBUG - Skipping highway/freeway: Marsh Drive
+2025-07-01 12:03:31,989 - DEBUG - Skipping highway/freeway: Redwood Highway
+2025-07-01 12:03:32,074 - DEBUG - Skipping highway/freeway: Walsh Drive
+2025-07-01 12:03:32,376 - DEBUG - Skipping highway/freeway: Ash Avenue
+2025-07-01 12:03:32,431 - DEBUG - Skipping highway/freeway: Ash Street
+2025-07-01 12:03:32,495 - DEBUG - Skipping highway/freeway: Panoramic Highway
+2025-07-01 12:03:32,843 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:03:33,249 - DEBUG - Skipping highway/freeway: Brush Street
+2025-07-01 12:03:33,249 - DEBUG - Skipping highway/freeway: Brush Street
+2025-07-01 12:03:33,255 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:33,545 - DEBUG - Skipping highway/freeway: Welsh Street
+2025-07-01 12:03:33,738 - DEBUG - Skipping highway/freeway: Shoreline Highway
+2025-07-01 12:03:33,809 - DEBUG - Skipping highway/freeway: Panoramic Highway
+2025-07-01 12:03:33,809 - DEBUG - Skipping highway/freeway: Panoramic Highway
+2025-07-01 12:03:33,809 - DEBUG - Skipping highway/freeway: Panoramic Highway
+2025-07-01 12:03:33,812 - DEBUG - Skipping highway/freeway: Panoramic Highway
+2025-07-01 12:03:33,842 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:34,076 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:34,386 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:34,386 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:34,484 - DEBUG - Skipping highway/freeway: Panoramic Highway
+2025-07-01 12:03:34,509 - DEBUG - Skipping highway/freeway: Panoramic Highway
+2025-07-01 12:03:34,896 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:34,896 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:35,161 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:35,161 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:35,214 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:35,214 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:35,321 - DEBUG - Skipping highway/freeway: Marsh Road
+2025-07-01 12:03:35,340 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:35,344 - DEBUG - Skipping highway/freeway: Redwood Highway
+2025-07-01 12:03:35,344 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:35,344 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:35,409 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:35,414 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:35,442 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:35,442 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:35,513 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:35,513 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:35,513 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:35,620 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:03:35,621 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:35,967 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:35,967 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:35,973 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:36,028 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:36,304 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:03:36,362 - DEBUG - Skipping highway/freeway: Hunters Point Expressway
+2025-07-01 12:03:36,448 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:36,479 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,514 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,515 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:36,650 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:36,660 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:36,731 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:36,734 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:36,735 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:36,735 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:36,735 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:36,735 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:36,778 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:36,873 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:36,882 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:36,928 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:36,928 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:03:36,928 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:03:36,928 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:36,928 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:03:36,928 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:37,204 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:37,252 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:37,252 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:37,269 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:37,269 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:37,280 - DEBUG - Skipping highway/freeway: Shoreline Highway
+2025-07-01 12:03:37,280 - DEBUG - Skipping highway/freeway: Shoreline Highway
+2025-07-01 12:03:37,343 - DEBUG - Skipping highway/freeway: Brush Street
+2025-07-01 12:03:37,386 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:37,419 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:03:37,419 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:37,440 - DEBUG - Skipping highway/freeway: Knockash Hill
+2025-07-01 12:03:37,489 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:37,489 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:37,531 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:37,566 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:37,567 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:37,571 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:37,571 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:37,608 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:37,608 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:37,692 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:37,801 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:37,812 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:37,855 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:37,884 - DEBUG - Skipping highway/freeway: Bill Walsh Way
+2025-07-01 12:03:38,008 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:38,170 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:38,172 - DEBUG - Skipping highway/freeway: Redwood Highway
+2025-07-01 12:03:38,189 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:38,451 - DEBUG - Skipping highway/freeway: Redwood Highway
+2025-07-01 12:03:38,452 - DEBUG - Skipping highway/freeway: Redwood Highway
+2025-07-01 12:03:38,452 - DEBUG - Skipping highway/freeway: Redwood Highway
+2025-07-01 12:03:38,503 - DEBUG - Skipping highway/freeway: Panoramic Highway
+2025-07-01 12:03:38,552 - DEBUG - Skipping highway/freeway: Redwood Highway
+2025-07-01 12:03:38,553 - DEBUG - Skipping highway/freeway: Redwood Highway
+2025-07-01 12:03:38,627 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:38,627 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:38,627 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:38,695 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:38,695 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:38,708 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:38,739 - DEBUG - Skipping highway/freeway: Ash Avenue
+2025-07-01 12:03:38,739 - DEBUG - Skipping highway/freeway: Ash Avenue
+2025-07-01 12:03:38,740 - DEBUG - Skipping highway/freeway: Shoreline Highway
+2025-07-01 12:03:38,802 - DEBUG - Skipping highway/freeway: Brush Street
+2025-07-01 12:03:38,807 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:38,813 - DEBUG - Skipping highway/freeway: Bush Street
+2025-07-01 12:03:38,892 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:03:39,037 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:39,077 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:39,080 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:39,080 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:03:39,135 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:03:39,181 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:39,192 - DEBUG - Skipping highway/freeway: Ash Street
+2025-07-01 12:03:39,192 - DEBUG - Skipping highway/freeway: Ash Street
+2025-07-01 12:03:39,237 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:39,237 - DEBUG - Skipping highway/freeway: Redwood Highway Frontage Road
+2025-07-01 12:03:39,371 - INFO - Found 3722 unique street names
+2025-07-01 12:03:39,373 - INFO - Processed 58 MultiLineString streets
+2025-07-01 12:03:39,376 - INFO - Processed 17587 single LineString streets
+2025-07-01 12:03:40,718 - INFO - Filtered 4745 streets to 1925 within boundary
+2025-07-01 12:03:40,723 - INFO - Filtered to 1925 streets within city boundary
+2025-07-01 12:03:40,723 - INFO - Processed 1925 street segments for San Francisco
+2025-07-01 12:03:41,187 - INFO - Saved 1925 streets to data/san_francisco_ca_streets.json
+2025-07-01 12:03:41,187 - INFO - Total miles: 1158.35
+2025-07-01 12:04:15,295 - INFO - Fetching streets for city: Berkeley, CA
+2025-07-01 12:04:15,296 - INFO - Fetching street data for Berkeley, CA
+2025-07-01 12:04:15,296 - INFO - Fetching boundary for Berkeley, CA
+2025-07-01 12:04:15,507 - INFO - Successfully fetched boundary for Berkeley
+2025-07-01 12:04:15,507 - INFO - Area: 57.83 km²
+2025-07-01 12:04:15,507 - INFO - Bounding box: [37.835727, -122.367781, 37.905824, -122.234179]
+2025-07-01 12:04:15,510 - INFO - Saved boundary to boundary/berkeley_ca.geojson
+2025-07-01 12:04:15,510 - INFO - Using city boundary polygon (Polygon)
+2025-07-01 12:04:15,510 - INFO - Using bounding box for Overpass query: 37.8357,-122.3678,37.9058,-122.2342
+2025-07-01 12:04:15,510 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 12:04:19,802 - INFO - Successfully fetched 33950 elements
+2025-07-01 12:04:21,941 - INFO - Found 648 unique street names
+2025-07-01 12:04:21,941 - INFO - Processed 28 MultiLineString streets
+2025-07-01 12:04:21,942 - INFO - Processed 3514 single LineString streets
+2025-07-01 12:04:22,603 - INFO - Filtered 716 streets to 421 within boundary
+2025-07-01 12:04:22,604 - INFO - Filtered to 421 streets within city boundary
+2025-07-01 12:04:22,604 - INFO - Processed 421 street segments for Berkeley
+2025-07-01 12:04:22,721 - INFO - Saved 421 streets to data/berkeley_ca_streets.json
+2025-07-01 12:04:22,721 - INFO - Total miles: 301.1
+2025-07-01 12:06:28,082 - INFO - Fetching streets for city: San Francisco, CA
+2025-07-01 12:06:28,083 - INFO - Fetching street data for San Francisco, CA
+2025-07-01 12:06:28,083 - INFO - Fetching boundary for San Francisco, CA
+2025-07-01 12:06:28,116 - INFO - Successfully fetched boundary for San Francisco
+2025-07-01 12:06:28,117 - INFO - Area: 756.61 km²
+2025-07-01 12:06:28,117 - INFO - Bounding box: [37.63983, -123.173825, 37.929824, -122.28178]
+2025-07-01 12:06:28,120 - INFO - Saved boundary to boundary/san_francisco_ca.geojson
+2025-07-01 12:06:28,120 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 12:06:28,121 - INFO - Using bounding box for Overpass query: 37.6398,-123.1738,37.9298,-122.2818
+2025-07-01 12:06:28,122 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 12:06:33,059 - INFO - Successfully fetched 158968 elements
+2025-07-01 12:06:43,155 - INFO - Found 3733 unique street names
+2025-07-01 12:06:43,157 - INFO - Processed 58 MultiLineString streets
+2025-07-01 12:06:43,159 - INFO - Processed 17640 single LineString streets
+2025-07-01 12:06:44,475 - INFO - Filtered 4759 streets to 1932 within boundary
+2025-07-01 12:06:44,480 - INFO - Filtered to 1932 streets within city boundary
+2025-07-01 12:06:44,480 - INFO - Processed 1932 street segments for San Francisco
+2025-07-01 12:06:44,937 - INFO - Saved 1932 streets to data/san_francisco_ca_streets.json
+2025-07-01 12:06:44,937 - INFO - Total miles: 1161.67
+2025-07-01 12:10:51,059 - INFO - Fetching streets for city: Berkeley, CA
+2025-07-01 12:10:51,060 - INFO - Fetching street data for Berkeley, CA
+2025-07-01 12:10:51,060 - INFO - Fetching boundary for Berkeley, CA
+2025-07-01 12:10:51,060 - DEBUG - Fetching from URL: https://raw.githubusercontent.com/generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/berkeley.json
+2025-07-01 12:10:51,062 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-07-01 12:10:51,321 - DEBUG - https://raw.githubusercontent.com:443 "GET /generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/berkeley.json HTTP/1.1" 200 7842
+2025-07-01 12:10:51,329 - INFO - Successfully fetched boundary for Berkeley
+2025-07-01 12:10:51,329 - INFO - Area: 57.83 km²
+2025-07-01 12:10:51,330 - INFO - Bounding box: [37.835727, -122.367781, 37.905824, -122.234179]
+2025-07-01 12:10:51,334 - INFO - Saved boundary to boundary/berkeley_ca.geojson
+2025-07-01 12:10:51,334 - INFO - Using city boundary polygon (Polygon)
+2025-07-01 12:10:51,335 - INFO - Simplified polygon from 2460 to 205 coordinates
+2025-07-01 12:10:51,335 - DEBUG - Generated polygon string with 102 coordinate pairs
+2025-07-01 12:10:51,335 - INFO - Using polygon boundary for Overpass query with 205 coordinate pairs
+2025-07-01 12:10:51,335 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 12:10:51,336 - DEBUG - Starting new HTTPS connection (1): overpass-api.de:443
+2025-07-01 12:10:51,849 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 400 473
+2025-07-01 12:10:51,850 - WARNING - Attempt 1 failed: 400 Client Error: Bad Request for url: https://overpass-api.de/api/interpreter
+2025-07-01 12:10:51,851 - INFO - Waiting 1 seconds before retry...
+2025-07-01 12:10:52,852 - INFO - Fetching data from Overpass API (attempt 2/3)
+2025-07-01 12:10:52,854 - DEBUG - Resetting dropped connection: overpass-api.de
+2025-07-01 12:10:53,369 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 400 473
+2025-07-01 12:10:53,369 - WARNING - Attempt 2 failed: 400 Client Error: Bad Request for url: https://overpass-api.de/api/interpreter
+2025-07-01 12:10:53,369 - INFO - Waiting 2 seconds before retry...
+2025-07-01 12:10:55,371 - INFO - Fetching data from Overpass API (attempt 3/3)
+2025-07-01 12:10:55,373 - DEBUG - Resetting dropped connection: overpass-api.de
+2025-07-01 12:10:55,878 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 400 473
+2025-07-01 12:10:55,879 - WARNING - Attempt 3 failed: 400 Client Error: Bad Request for url: https://overpass-api.de/api/interpreter
+2025-07-01 12:10:55,879 - ERROR - Error: 400 Client Error: Bad Request for url: https://overpass-api.de/api/interpreter
+2025-07-01 12:11:32,021 - INFO - Simplified polygon from 2460 to 205 coordinates
+2025-07-01 12:11:32,023 - INFO - Simplified polygon from 2460 to 205 coordinates
+2025-07-01 12:11:32,023 - INFO - Using polygon boundary for Overpass query with 205 coordinate pairs
+2025-07-01 12:12:25,235 - INFO - Simplified polygon from 1230 to 205 coordinate pairs
+2025-07-01 12:12:46,203 - INFO - Simplified polygon from 1229 to 205 coordinate pairs
+2025-07-01 12:12:53,641 - INFO - Fetching streets for city: Berkeley, CA
+2025-07-01 12:12:53,641 - INFO - Fetching street data for Berkeley, CA
+2025-07-01 12:12:53,641 - INFO - Fetching boundary for Berkeley, CA
+2025-07-01 12:12:53,642 - DEBUG - Fetching from URL: https://raw.githubusercontent.com/generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/berkeley.json
+2025-07-01 12:12:53,643 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-07-01 12:12:53,676 - DEBUG - https://raw.githubusercontent.com:443 "GET /generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/berkeley.json HTTP/1.1" 200 7842
+2025-07-01 12:12:53,679 - INFO - Successfully fetched boundary for Berkeley
+2025-07-01 12:12:53,679 - INFO - Area: 57.83 km²
+2025-07-01 12:12:53,679 - INFO - Bounding box: [37.835727, -122.367781, 37.905824, -122.234179]
+2025-07-01 12:12:53,684 - INFO - Saved boundary to boundary/berkeley_ca.geojson
+2025-07-01 12:12:53,684 - INFO - Using city boundary polygon (Polygon)
+2025-07-01 12:12:53,684 - INFO - Simplified polygon from 1229 to 205 coordinate pairs
+2025-07-01 12:12:53,684 - DEBUG - Generated polygon string with 205 coordinate pairs
+2025-07-01 12:12:53,684 - INFO - Using polygon boundary for Overpass query with 410 coordinate pairs
+2025-07-01 12:12:53,684 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 12:12:53,685 - DEBUG - Starting new HTTPS connection (1): overpass-api.de:443
+2025-07-01 12:12:55,919 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 200 None
+2025-07-01 12:12:56,952 - INFO - Successfully fetched 21428 elements
+2025-07-01 12:12:57,750 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:12:57,973 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:12:57,980 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:12:57,981 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:12:57,987 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:12:58,131 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:12:58,131 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:12:58,131 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:12:58,235 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:12:58,235 - DEBUG - Skipping highway/freeway: Eastshore Highway
+2025-07-01 12:12:58,279 - INFO - Found 418 unique street names
+2025-07-01 12:12:58,279 - INFO - Processed 19 MultiLineString streets
+2025-07-01 12:12:58,280 - INFO - Processed 2211 single LineString streets
+2025-07-01 12:12:58,780 - INFO - Filtered 438 streets to 424 within boundary
+2025-07-01 12:12:58,780 - INFO - Filtered to 424 streets within city boundary
+2025-07-01 12:12:58,780 - INFO - Processed 424 street segments for Berkeley
+2025-07-01 12:12:58,875 - INFO - Saved 424 streets to data/berkeley_ca_streets.json
+2025-07-01 12:12:58,876 - INFO - Total miles: 252.01
+2025-07-01 12:31:37,001 - INFO - Fetching streets for city: San Francisco, CA
+2025-07-01 12:31:37,002 - INFO - Fetching street data for San Francisco, CA
+2025-07-01 12:31:37,002 - INFO - Fetching boundary for San Francisco, CA
+2025-07-01 12:31:37,002 - DEBUG - Fetching from URL: https://raw.githubusercontent.com/generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/san-francisco.json
+2025-07-01 12:31:37,003 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-07-01 12:31:37,254 - DEBUG - https://raw.githubusercontent.com:443 "GET /generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/san-francisco.json HTTP/1.1" 200 3637
+2025-07-01 12:31:37,259 - INFO - Successfully fetched boundary for San Francisco
+2025-07-01 12:31:37,259 - INFO - Area: 756.61 km²
+2025-07-01 12:31:37,259 - INFO - Bounding box: [37.63983, -123.173825, 37.929824, -122.28178]
+2025-07-01 12:31:37,263 - INFO - Saved boundary to boundary/san_francisco_ca.geojson
+2025-07-01 12:31:37,263 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 12:31:37,264 - INFO - Simplified polygon from 425 to 213 coordinate pairs
+2025-07-01 12:31:37,264 - DEBUG - Generated polygon string with 213 coordinate pairs
+2025-07-01 12:31:37,264 - INFO - Using polygon boundary for Overpass query with 426 coordinate pairs
+2025-07-01 12:31:37,264 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 12:31:37,265 - DEBUG - Starting new HTTPS connection (1): overpass-api.de:443
+2025-07-01 12:31:40,554 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 200 None
+2025-07-01 12:31:42,188 - INFO - Successfully fetched 72538 elements
+2025-07-01 12:31:42,713 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:42,713 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:31:42,713 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:43,165 - DEBUG - Skipping highway/freeway: Hunters Point Expressway
+2025-07-01 12:31:43,573 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:31:44,220 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:44,221 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:44,738 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:44,738 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:44,993 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:31:44,993 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:45,353 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:31:45,382 - DEBUG - Skipping highway/freeway: Hunters Point Expressway
+2025-07-01 12:31:45,441 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:31:45,560 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:45,661 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:45,661 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:31:45,661 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:31:45,661 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:45,662 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:31:45,662 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:45,959 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:31:45,959 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:46,196 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:46,606 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:31:46,708 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:46,750 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:31:46,842 - INFO - Found 1849 unique street names
+2025-07-01 12:31:46,843 - INFO - Processed 20 MultiLineString streets
+2025-07-01 12:31:46,844 - INFO - Processed 9173 single LineString streets
+2025-07-01 12:31:47,693 - INFO - Filtered 1948 streets to 1941 within boundary
+2025-07-01 12:31:47,694 - INFO - Filtered to 1941 streets within city boundary
+2025-07-01 12:31:47,694 - INFO - Processed 1941 street segments for San Francisco
+2025-07-01 12:31:48,067 - INFO - Saved 1941 streets to data/san_francisco_ca_streets.json
+2025-07-01 12:31:48,067 - INFO - Total miles: 982.13
+2025-07-01 12:36:58,574 - INFO - Fetching streets for city: San Francisco, CA
+2025-07-01 12:36:58,575 - INFO - Fetching street data for San Francisco, CA
+2025-07-01 12:36:58,575 - INFO - Fetching boundary for San Francisco, CA
+2025-07-01 12:36:58,575 - DEBUG - Fetching from URL: https://raw.githubusercontent.com/generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/san-francisco.json
+2025-07-01 12:36:58,577 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-07-01 12:36:58,763 - DEBUG - https://raw.githubusercontent.com:443 "GET /generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/san-francisco.json HTTP/1.1" 200 3637
+2025-07-01 12:36:58,769 - INFO - Successfully fetched boundary for San Francisco
+2025-07-01 12:36:58,769 - INFO - Area: 756.61 km²
+2025-07-01 12:36:58,769 - INFO - Bounding box: [37.63983, -123.173825, 37.929824, -122.28178]
+2025-07-01 12:36:58,772 - INFO - Saved boundary to boundary/san_francisco_ca.geojson
+2025-07-01 12:36:58,772 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 12:36:58,772 - INFO - Simplified polygon from 425 to 213 coordinate pairs
+2025-07-01 12:36:58,772 - DEBUG - Generated polygon string with 213 coordinate pairs
+2025-07-01 12:36:58,772 - INFO - Using polygon boundary for Overpass query with 426 coordinate pairs
+2025-07-01 12:36:58,772 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 12:36:58,773 - DEBUG - Starting new HTTPS connection (1): overpass-api.de:443
+2025-07-01 12:37:01,206 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 200 None
+2025-07-01 12:37:02,796 - INFO - Successfully fetched 72538 elements
+2025-07-01 12:37:03,320 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:03,320 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:37:03,320 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:03,765 - DEBUG - Skipping highway/freeway: Hunters Point Expressway
+2025-07-01 12:37:04,168 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:37:04,812 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:04,812 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:05,325 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:05,325 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:05,580 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:37:05,580 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:05,943 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:37:05,972 - DEBUG - Skipping highway/freeway: Hunters Point Expressway
+2025-07-01 12:37:06,030 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:37:06,148 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:06,248 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:06,248 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:37:06,248 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:37:06,248 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:06,248 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:37:06,248 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:06,543 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:37:06,543 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:06,779 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:07,186 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:37:07,289 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:07,330 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:37:07,421 - INFO - Found 1849 unique street names
+2025-07-01 12:37:07,422 - INFO - Processed 20 MultiLineString streets
+2025-07-01 12:37:07,423 - INFO - Processed 9173 single LineString streets
+2025-07-01 12:37:08,271 - INFO - Filtered 1948 streets to 1941 within boundary
+2025-07-01 12:37:08,271 - INFO - Filtered to 1941 streets within city boundary
+2025-07-01 12:37:08,271 - INFO - Processed 1941 street segments for San Francisco
+2025-07-01 12:37:08,648 - INFO - Saved 1941 streets to data/san_francisco_ca_streets.json
+2025-07-01 12:37:08,648 - INFO - Total miles: 982.13
+2025-07-01 12:37:38,970 - INFO - Simplified polygon from 425 to 213 coordinate pairs
+2025-07-01 12:38:42,947 - INFO - Fetching streets for city: San Francisco, CA
+2025-07-01 12:38:42,947 - INFO - Fetching street data for San Francisco, CA
+2025-07-01 12:38:42,947 - INFO - Fetching boundary for San Francisco, CA
+2025-07-01 12:38:42,948 - DEBUG - Fetching from URL: https://raw.githubusercontent.com/generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/san-francisco.json
+2025-07-01 12:38:42,949 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-07-01 12:38:42,974 - DEBUG - https://raw.githubusercontent.com:443 "GET /generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/san-francisco.json HTTP/1.1" 200 3637
+2025-07-01 12:38:42,975 - INFO - Successfully fetched boundary for San Francisco
+2025-07-01 12:38:42,975 - INFO - Area: 756.61 km²
+2025-07-01 12:38:42,975 - INFO - Bounding box: [37.63983, -123.173825, 37.929824, -122.28178]
+2025-07-01 12:38:42,977 - INFO - Saved boundary to boundary/san_francisco_ca.geojson
+2025-07-01 12:38:42,977 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 12:38:42,978 - INFO - Simplified polygon from 425 to 213 coordinate pairs
+2025-07-01 12:38:42,978 - DEBUG - Generated polygon string with 213 coordinate pairs
+2025-07-01 12:38:42,978 - INFO - Using polygon boundary for Overpass query with 426 coordinate pairs
+2025-07-01 12:38:42,978 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 12:38:42,979 - DEBUG - Starting new HTTPS connection (1): overpass-api.de:443
+2025-07-01 12:38:45,811 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 200 None
+2025-07-01 12:38:47,433 - INFO - Successfully fetched 79420 elements
+2025-07-01 12:38:47,969 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:47,969 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:47,969 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:38:47,969 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:48,424 - DEBUG - Skipping highway/freeway: Hunters Point Expressway
+2025-07-01 12:38:48,836 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:48,849 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:38:49,584 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:49,584 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,162 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,162 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,192 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,192 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,225 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,449 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:38:50,449 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,705 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,706 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,838 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:38:50,859 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,859 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,859 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,861 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,861 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,887 - DEBUG - Skipping highway/freeway: Hunters Point Expressway
+2025-07-01 12:38:50,887 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,887 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,889 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,889 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,889 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,899 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:50,968 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:38:51,059 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,102 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,110 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,190 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,236 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,236 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:38:51,236 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:38:51,236 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,236 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:38:51,236 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,242 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,242 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,242 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,313 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,465 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,465 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,571 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:38:51,571 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:51,822 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:52,286 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:38:52,391 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:52,435 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:52,465 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:38:52,531 - INFO - Found 1855 unique street names
+2025-07-01 12:38:52,532 - INFO - Processed 20 MultiLineString streets
+2025-07-01 12:38:52,533 - INFO - Processed 10580 single LineString streets
+2025-07-01 12:38:53,504 - INFO - Filtered 1955 streets to 1948 within boundary
+2025-07-01 12:38:53,504 - INFO - Filtered to 1948 streets within city boundary
+2025-07-01 12:38:53,504 - INFO - Processed 1948 street segments for San Francisco
+2025-07-01 12:38:53,924 - INFO - Saved 1948 streets to data/san_francisco_ca_streets.json
+2025-07-01 12:38:53,925 - INFO - Total miles: 1060.86
+2025-07-01 12:39:29,371 - INFO - Fetching streets for city: San Francisco, CA
+2025-07-01 12:39:29,372 - INFO - Fetching street data for San Francisco, CA
+2025-07-01 12:39:29,372 - INFO - Fetching boundary for San Francisco, CA
+2025-07-01 12:39:29,372 - DEBUG - Fetching from URL: https://raw.githubusercontent.com/generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/san-francisco.json
+2025-07-01 12:39:29,373 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-07-01 12:39:29,397 - DEBUG - https://raw.githubusercontent.com:443 "GET /generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/san-francisco.json HTTP/1.1" 200 3637
+2025-07-01 12:39:29,399 - INFO - Successfully fetched boundary for San Francisco
+2025-07-01 12:39:29,399 - INFO - Area: 756.61 km²
+2025-07-01 12:39:29,399 - INFO - Bounding box: [37.63983, -123.173825, 37.929824, -122.28178]
+2025-07-01 12:39:29,403 - INFO - Saved boundary to boundary/san_francisco_ca.geojson
+2025-07-01 12:39:29,403 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 12:39:29,404 - INFO - Simplified polygon from 425 to 213 coordinate pairs
+2025-07-01 12:39:29,404 - DEBUG - Generated polygon string with 213 coordinate pairs
+2025-07-01 12:39:29,404 - INFO - Using polygon boundary for Overpass query with 426 coordinate pairs
+2025-07-01 12:39:29,404 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 12:39:29,405 - DEBUG - Starting new HTTPS connection (1): overpass-api.de:443
+2025-07-01 12:39:31,773 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 200 None
+2025-07-01 12:39:33,525 - INFO - Successfully fetched 79420 elements
+2025-07-01 12:39:34,060 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:34,060 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:34,060 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:39:34,060 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:34,517 - DEBUG - Skipping highway/freeway: Hunters Point Expressway
+2025-07-01 12:39:34,920 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:34,933 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:39:35,655 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:35,655 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,221 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,221 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,251 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,251 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,284 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,505 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:39:36,505 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,761 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,761 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,892 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:39:36,913 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,913 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,913 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,915 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,915 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,940 - DEBUG - Skipping highway/freeway: Hunters Point Expressway
+2025-07-01 12:39:36,941 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,941 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,943 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,943 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,943 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:36,953 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,022 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:39:37,112 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,156 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,163 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,242 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,288 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,288 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:39:37,288 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:39:37,288 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,288 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:39:37,288 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,295 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,295 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,295 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,368 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,519 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,519 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,625 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:39:37,625 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:37,872 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:38,330 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:39:38,433 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:38,478 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:38,507 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:39:38,573 - INFO - Found 1855 unique street names
+2025-07-01 12:39:38,575 - INFO - Processed 20 MultiLineString streets
+2025-07-01 12:39:38,576 - INFO - Processed 10580 single LineString streets
+2025-07-01 12:39:39,548 - INFO - Filtered 1955 streets to 1948 within boundary
+2025-07-01 12:39:39,548 - INFO - Filtered to 1948 streets within city boundary
+2025-07-01 12:39:39,548 - INFO - Processed 1948 street segments for San Francisco
+2025-07-01 12:39:39,945 - INFO - Saved 1948 streets to data/san_francisco_ca_streets.json
+2025-07-01 12:39:39,945 - INFO - Total miles: 1060.86
+2025-07-01 12:43:56,919 - INFO - Fetching streets for city: San Francisco, CA
+2025-07-01 12:43:56,919 - INFO - Fetching street data for San Francisco, CA
+2025-07-01 12:43:56,919 - INFO - Fetching boundary for San Francisco, CA
+2025-07-01 12:43:56,920 - DEBUG - Fetching from URL: https://raw.githubusercontent.com/generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/san-francisco.json
+2025-07-01 12:43:56,921 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-07-01 12:43:57,092 - DEBUG - https://raw.githubusercontent.com:443 "GET /generalpiston/geojson-us-city-boundaries/refs/heads/master/cities/ca/san-francisco.json HTTP/1.1" 200 3637
+2025-07-01 12:43:57,095 - INFO - Successfully fetched boundary for San Francisco
+2025-07-01 12:43:57,095 - INFO - Area: 756.61 km²
+2025-07-01 12:43:57,096 - INFO - Bounding box: [37.63983, -123.173825, 37.929824, -122.28178]
+2025-07-01 12:43:57,099 - INFO - Saved boundary to boundary/san_francisco_ca.geojson
+2025-07-01 12:43:57,099 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 12:43:57,099 - INFO - Simplified polygon from 425 to 213 coordinate pairs
+2025-07-01 12:43:57,099 - DEBUG - Generated polygon string with 213 coordinate pairs
+2025-07-01 12:43:57,099 - INFO - Using polygon boundary for Overpass query with 426 coordinate pairs
+2025-07-01 12:43:57,099 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 12:43:57,100 - DEBUG - Starting new HTTPS connection (1): overpass-api.de:443
+2025-07-01 12:43:59,808 - DEBUG - https://overpass-api.de:443 "POST /api/interpreter HTTP/1.1" 200 None
+2025-07-01 12:44:01,459 - INFO - Successfully fetched 79420 elements
+2025-07-01 12:44:02,004 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:02,005 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:02,005 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:44:02,005 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:02,497 - DEBUG - Skipping highway/freeway: Hunters Point Expressway
+2025-07-01 12:44:02,925 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:02,939 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:44:03,687 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:03,687 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:04,267 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:04,267 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:04,297 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:04,297 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:04,332 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:04,557 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:44:04,557 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:04,817 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:04,817 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:04,952 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:44:04,974 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:04,974 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:04,974 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:04,976 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:04,976 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,002 - DEBUG - Skipping highway/freeway: Hunters Point Expressway
+2025-07-01 12:44:05,002 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,003 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,004 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,004 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,004 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,015 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,086 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:44:05,177 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,222 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,230 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,312 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,359 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,359 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:44:05,359 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:44:05,359 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,359 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:44:05,359 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,366 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,366 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,366 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,438 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,593 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,593 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,699 - DEBUG - Skipping highway/freeway: Lower Great Highway
+2025-07-01 12:44:05,699 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:05,954 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:06,421 - DEBUG - Skipping highway/freeway: Great Highway Extension
+2025-07-01 12:44:06,527 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:06,572 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:06,602 - DEBUG - Skipping highway/freeway: Great Highway
+2025-07-01 12:44:06,669 - INFO - Found 1855 unique street names
+2025-07-01 12:44:06,671 - INFO - Processed 20 MultiLineString streets
+2025-07-01 12:44:06,672 - INFO - Processed 10580 single LineString streets
+2025-07-01 12:44:07,655 - INFO - Filtered 1955 streets to 1948 within boundary
+2025-07-01 12:44:07,656 - INFO - Filtered to 1948 streets within city boundary
+2025-07-01 12:44:07,656 - INFO - Processed 1948 street segments for San Francisco
+2025-07-01 12:44:08,053 - INFO - Saved 1948 streets to data/san_francisco_ca_streets.json
+2025-07-01 12:44:08,053 - INFO - Total miles: 1060.86
+2025-07-01 17:29:24,162 - INFO - Fetching streets for city: Los Angeles, CA
+2025-07-01 17:29:24,163 - INFO - Fetching street data for Los Angeles, CA
+2025-07-01 17:29:24,163 - INFO - Fetching boundary for Los Angeles, CA
+2025-07-01 17:29:24,222 - INFO - Successfully fetched boundary for Los Angeles
+2025-07-01 17:29:24,222 - INFO - Area: 1567.46 km²
+2025-07-01 17:29:24,222 - INFO - Bounding box: [33.703652, -118.668176, 34.337306, -118.155289]
+2025-07-01 17:29:24,240 - INFO - Saved boundary to boundary/los_angeles_ca.geojson
+2025-07-01 17:29:24,240 - INFO - Using city boundary polygon (Polygon)
+2025-07-01 17:29:24,243 - INFO - Simplified polygon from 5650 to 202 coordinate pairs
+2025-07-01 17:29:24,243 - INFO - Using polygon boundary for Overpass query with 404 coordinate pairs
+2025-07-01 17:29:24,243 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 17:29:37,351 - INFO - Successfully fetched 385305 elements
+2025-07-01 17:30:01,978 - INFO - Found 9267 unique street names
+2025-07-01 17:30:01,984 - INFO - Processed 9 MultiLineString streets
+2025-07-01 17:30:01,991 - INFO - Processed 58119 single LineString streets
+2025-07-01 17:31:25,037 - INFO - Filtered 10994 streets to 10142 within boundary
+2025-07-01 17:31:25,039 - INFO - Filtered to 10142 streets within city boundary
+2025-07-01 17:31:25,039 - INFO - Processed 10142 street segments for Los Angeles
+2025-07-01 17:31:27,195 - INFO - Saved 10142 streets to data/los_angeles_ca_streets.json
+2025-07-01 17:31:27,195 - INFO - Total miles: 7146.5
+2025-07-01 17:31:43,091 - INFO - Fetching streets for city: New York, NY
+2025-07-01 17:31:43,092 - INFO - Fetching street data for New York, NY
+2025-07-01 17:31:43,092 - INFO - Fetching boundary for New York, NY
+2025-07-01 17:31:43,290 - INFO - Successfully fetched boundary for New York
+2025-07-01 17:31:43,291 - INFO - Area: 1591.09 km²
+2025-07-01 17:31:43,291 - INFO - Bounding box: [40.477399, -74.25909, 40.917577, -73.700009]
+2025-07-01 17:31:43,294 - INFO - Saved boundary to boundary/new_york_ny.geojson
+2025-07-01 17:31:43,294 - INFO - Using city boundary polygon (MultiPolygon)
+2025-07-01 17:31:43,295 - INFO - Simplified polygon from 1322 to 221 coordinate pairs
+2025-07-01 17:31:43,295 - INFO - Using polygon boundary for Overpass query with 442 coordinate pairs
+2025-07-01 17:31:43,295 - INFO - Fetching data from Overpass API (attempt 1/3)
+2025-07-01 17:31:54,422 - INFO - Successfully fetched 343348 elements
+2025-07-01 17:32:16,822 - INFO - Found 5981 unique street names
+2025-07-01 17:32:16,828 - INFO - Processed 16 MultiLineString streets
+2025-07-01 17:32:16,833 - INFO - Processed 48650 single LineString streets
+2025-07-01 17:32:27,270 - INFO - Filtered 8126 streets to 8099 within boundary
+2025-07-01 17:32:27,271 - INFO - Filtered to 8099 streets within city boundary
+2025-07-01 17:32:27,271 - INFO - Processed 8099 street segments for New York
+2025-07-01 17:32:29,293 - INFO - Saved 8099 streets to data/new_york_ny_streets.json
+2025-07-01 17:32:29,293 - INFO - Total miles: 6138.67

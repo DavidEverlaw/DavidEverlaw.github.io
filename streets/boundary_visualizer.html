@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Boundary Visualizer</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .control-group label {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        
+        select, input, button {
+            padding: 10px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            min-width: 120px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+        
+        .file-input-label {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .file-input-label:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        
+        #map {
+            height: 70vh;
+            width: 100%;
+            border-top: 3px solid #667eea;
+        }
+        
+        .info-panel {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .info-panel.show {
+            display: block;
+        }
+        
+        .info-panel h3 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .info-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .info-item strong {
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 8px;
+            border: 1px solid #f5c6cb;
+            display: none;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 8px;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .legend {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            font-size: 14px;
+        }
+        
+        .legend h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border: 2px solid #333;
+            border-radius: 3px;
+        }
+        
+        .instructions {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 8px;
+            color: #0066cc;
+        }
+        
+        .instructions h4 {
+            margin-top: 0;
+            color: #0052a3;
+        }
+        
+        .instructions code {
+            background: #f1f1f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🗺️ City Boundary Visualizer</h1>
+        <p>Visualize and inspect GeoJSON boundary data from the City Boundary Fetcher</p>
+    </div>
+    
+    <div class="instructions">
+        <h4>How to use:</h4>
+        <p>
+            1. <strong>Upload a GeoJSON file:</strong> Click "Upload GeoJSON" to load boundary files from your computer<br>
+            2. <strong>Generate boundary data:</strong> Run <code>python street_data/city_boundary_fetcher.py "City Name" --state ST</code> to create boundary files<br>
+            3. <strong>Inspect the results:</strong> Look for issues like overly large boundaries, incorrect shapes, or missing areas
+        </p>
+    </div>
+    
+    <div class="controls">
+        <div class="file-input-wrapper">
+            <input type="file" id="file-input" accept=".geojson,.json" />
+            <label for="file-input" class="file-input-label">📁 Upload GeoJSON</label>
+        </div>
+        
+        <button id="clear-btn">🗑️ Clear Map</button>
+        
+        <button id="sample-btn">📍 Load San Francisco Sample</button>
+    </div>
+    
+    <div class="error-message" id="error-message"></div>
+    <div class="success-message" id="success-message"></div>
+    
+    <div id="map"></div>
+    
+    <div class="legend">
+        <h4>Legend</h4>
+        <div class="legend-item">
+            <div class="legend-color" style="background: rgba(255, 0, 0, 0.3);"></div>
+            <span>City Boundary</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: rgba(0, 0, 255, 0.3);"></div>
+            <span>Bounding Box</span>
+        </div>
+    </div>
+    
+    <div class="info-panel" id="info-panel">
+        <h3>Boundary Information</h3>
+        <div id="boundary-info"></div>
+    </div>
+    
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        class BoundaryVisualizer {
+            constructor() {
+                this.map = null;
+                this.boundaryLayer = null;
+                this.bboxLayer = null;
+                this.currentBoundary = null;
+                
+                this.init();
+            }
+            
+            init() {
+                this.initMap();
+                this.bindEvents();
+            }
+            
+            initMap() {
+                // Initialize map centered on San Francisco
+                this.map = L.map('map').setView([37.7749, -122.4194], 11);
+                
+                // Add tile layer
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors',
+                    maxZoom: 18
+                }).addTo(this.map);
+                
+                // Add scale control
+                L.control.scale().addTo(this.map);
+            }
+            
+            bindEvents() {
+                document.getElementById('file-input').addEventListener('change', (e) => {
+                    this.loadFromFile(e.target.files[0]);
+                });
+                
+                document.getElementById('clear-btn').addEventListener('click', () => {
+                    this.clearMap();
+                });
+                
+                document.getElementById('sample-btn').addEventListener('click', () => {
+                    this.loadSampleData();
+                });
+            }
+            
+            loadFromFile(file) {
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const geojson = JSON.parse(e.target.result);
+                        this.displayBoundary(geojson, file.name);
+                        this.showMessage(`Successfully loaded ${file.name}`, 'success');
+                    } catch (error) {
+                        this.showMessage(`Error parsing file: ${error.message}`, 'error');
+                    }
+                };
+                reader.readAsText(file);
+            }
+            
+            loadSampleData() {
+                // Try to load San Francisco boundary if it exists
+                fetch('street_data/boundary/san_francisco_ca.geojson')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Sample file not found. Generate it first with: python street_data/city_boundary_fetcher.py "San Francisco" --state CA');
+                        }
+                        return response.json();
+                    })
+                    .then(geojson => {
+                        this.displayBoundary(geojson, 'san_francisco_ca.geojson');
+                        this.showMessage('Loaded San Francisco sample boundary', 'success');
+                    })
+                    .catch(error => {
+                        this.showMessage(error.message, 'error');
+                    });
+            }
+            
+            displayBoundary(geojson, filename = 'boundary') {
+                this.clearMap();
+                
+                // Extract feature from FeatureCollection if needed
+                let feature = geojson;
+                if (geojson.type === 'FeatureCollection' && geojson.features.length > 0) {
+                    feature = geojson.features[0];
+                }
+                
+                // Store current boundary
+                this.currentBoundary = feature;
+                
+                // Add boundary to map
+                this.boundaryLayer = L.geoJSON(feature, {
+                    style: {
+                        color: '#ff0000',
+                        weight: 3,
+                        opacity: 0.8,
+                        fillColor: '#ff0000',
+                        fillOpacity: 0.2
+                    }
+                }).addTo(this.map);
+                
+                // Add bounding box if available
+                if (feature.properties && feature.properties.bbox) {
+                    const bbox = feature.properties.bbox;
+                    // bbox format: [south, west, north, east]
+                    const bounds = [[bbox[0], bbox[1]], [bbox[2], bbox[3]]];
+                    
+                    this.bboxLayer = L.rectangle(bounds, {
+                        color: '#0000ff',
+                        weight: 2,
+                        opacity: 0.6,
+                        fillColor: '#0000ff',
+                        fillOpacity: 0.1
+                    }).addTo(this.map);
+                }
+                
+                // Fit map to boundary
+                this.map.fitBounds(this.boundaryLayer.getBounds(), { padding: [20, 20] });
+                
+                // Show boundary information
+                this.showBoundaryInfo(feature, filename);
+            }
+            
+            showBoundaryInfo(feature, filename) {
+                const props = feature.properties || {};
+                const geometry = feature.geometry;
+                
+                let coordinateCount = 0;
+                let polygonCount = 0;
+                let geometryType = geometry.type;
+                
+                if (geometry.type === 'Polygon') {
+                    polygonCount = 1;
+                    coordinateCount = geometry.coordinates[0].length;
+                } else if (geometry.type === 'MultiPolygon') {
+                    polygonCount = geometry.coordinates.length;
+                    coordinateCount = geometry.coordinates.reduce((sum, polygon) => 
+                        sum + polygon[0].length, 0
+                    );
+                }
+                
+                // Calculate bounds for analysis
+                const bounds = this.boundaryLayer.getBounds();
+                const area = this.calculateApproximateArea(bounds);
+                
+                const info = document.getElementById('boundary-info');
+                info.innerHTML = `
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>File:</strong>
+                            ${filename}
+                        </div>
+                        <div class="info-item">
+                            <strong>City:</strong>
+                            ${props.name || 'Unknown'}
+                        </div>
+                        <div class="info-item">
+                            <strong>State:</strong>
+                            ${props.state || 'Unknown'}
+                        </div>
+                        <div class="info-item">
+                            <strong>Country:</strong>
+                            ${props.country || 'Unknown'}
+                        </div>
+                        <div class="info-item">
+                            <strong>OSM ID:</strong>
+                            ${props.osm_id || 'Unknown'}
+                        </div>
+                        <div class="info-item">
+                            <strong>OSM Type:</strong>
+                            ${props.osm_type || 'Unknown'}
+                        </div>
+                        <div class="info-item">
+                            <strong>Geometry Type:</strong>
+                            ${geometryType}
+                        </div>
+                        <div class="info-item">
+                            <strong>Polygon Count:</strong>
+                            ${polygonCount}
+                        </div>
+                        <div class="info-item">
+                            <strong>Coordinate Points:</strong>
+                            ${coordinateCount.toLocaleString()}
+                        </div>
+                        <div class="info-item">
+                            <strong>Stored Area:</strong>
+                            ${props.area_km2 ? `${props.area_km2.toFixed(2)} km²` : 'Not available'}
+                        </div>
+                        <div class="info-item">
+                            <strong>Approx. Area:</strong>
+                            ${area.toFixed(2)} km²
+                        </div>
+                        <div class="info-item">
+                            <strong>Bounding Box:</strong>
+                            ${props.bbox ? `[${props.bbox.map(n => n.toFixed(4)).join(', ')}]` : 'Not available'}
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 6px;">
+                        <strong>🔍 Analysis Tips:</strong><br>
+                        • Check if the boundary shape looks correct for your city<br>
+                        • Very large areas might indicate incorrect boundary data<br>
+                        • Multiple disconnected polygons might be expected (islands, etc.)<br>
+                        • Compare the red boundary with the blue bounding box<br>
+                        • Large coordinate counts (>10,000) might slow down processing
+                    </div>
+                `;
+                
+                document.getElementById('info-panel').classList.add('show');
+            }
+            
+            calculateApproximateArea(bounds) {
+                // Very rough area calculation in km²
+                const latDiff = bounds.getNorth() - bounds.getSouth();
+                const lngDiff = bounds.getEast() - bounds.getWest();
+                
+                // Approximate conversion (very rough, good enough for comparison)
+                const kmPerDegreeLat = 111;
+                const kmPerDegreeLng = 111 * Math.cos((bounds.getCenter().lat * Math.PI) / 180);
+                
+                return latDiff * kmPerDegreeLat * lngDiff * kmPerDegreeLng;
+            }
+            
+            clearMap() {
+                if (this.boundaryLayer) {
+                    this.map.removeLayer(this.boundaryLayer);
+                    this.boundaryLayer = null;
+                }
+                
+                if (this.bboxLayer) {
+                    this.map.removeLayer(this.bboxLayer);
+                    this.bboxLayer = null;
+                }
+                
+                document.getElementById('info-panel').classList.remove('show');
+                this.currentBoundary = null;
+                
+                // Reset file input
+                document.getElementById('file-input').value = '';
+            }
+            
+            showMessage(message, type = 'info') {
+                const errorDiv = document.getElementById('error-message');
+                const successDiv = document.getElementById('success-message');
+                
+                // Hide both first
+                errorDiv.style.display = 'none';
+                successDiv.style.display = 'none';
+                
+                if (type === 'error') {
+                    errorDiv.textContent = message;
+                    errorDiv.style.display = 'block';
+                } else {
+                    successDiv.textContent = message;
+                    successDiv.style.display = 'block';
+                }
+                
+                // Auto-hide after 8 seconds
+                setTimeout(() => {
+                    errorDiv.style.display = 'none';
+                    successDiv.style.display = 'none';
+                }, 8000);
+            }
+        }
+        
+        // Initialize the visualizer when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new BoundaryVisualizer();
+        });
+    </script>
+</body>
+</html> 

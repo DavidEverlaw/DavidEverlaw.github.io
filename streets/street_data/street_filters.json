@@ -1,0 +1,30 @@
+{
+  "_comment": "Street filters for excluding specific streets from the game. Each key should match the city_state naming convention used in the data files. Values are arrays of exact full_name matches to filter out.",
+  "san_francisco_ca": [
+    "PRIVATE RD",
+    "UNNAMED ST",
+    "SERVICE RD",
+    "MOORE RD"
+  ],
+  "berkeley_ca": [
+    "PRIVATE RD",
+    "UNNAMED ST", 
+    "SERVICE RD",
+    "ACTON CRESCENT"
+  ],
+  "oakland_ca": [
+    "PRIVATE RD",
+    "UNNAMED ST",
+    "SERVICE RD"
+  ],
+  "seattle_wa": [
+    "PRIVATE RD",
+    "UNNAMED ST",
+    "SERVICE RD"
+  ],
+  "new_york_ny": [
+    "PRIVATE RD",
+    "UNNAMED ST",
+    "SERVICE RD"
+  ]
+} 

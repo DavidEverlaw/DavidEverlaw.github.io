@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Game Integration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .loading { background-color: #d1ecf1; border-color: #bee5eb; }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 3px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover { background-color: #0056b3; }
+        #results { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>🎮 Street Names Game - Integration Test</h1>
+    
+    <div class="test-section">
+        <h2>Test Data Loading with New Naming Convention</h2>
+        <p>This test verifies that the game can load street data using the new naming paradigm.</p>
+        
+        <button onclick="testSanFrancisco()">Test San Francisco (New Format)</button>
+        <button onclick="testDataAvailability()">Check Data Availability</button>
+        <button onclick="testRegionMapping()">Test Region Mapping</button>
+    </div>
+    
+    <div id="results"></div>
+
+    <!-- Include game modules -->
+    <script src="js/DataManager.js"></script>
+    <script src="js/GameState.js"></script>
+    <script src="js/GameLogic.js"></script>
+
+    <script>
+        const results = document.getElementById('results');
+        
+        function addResult(title, message, type = 'loading') {
+            const div = document.createElement('div');
+            div.className = `test-section ${type}`;
+            div.innerHTML = `<h3>${title}</h3><p>${message}</p>`;
+            results.appendChild(div);
+            return div;
+        }
+        
+        async function testSanFrancisco() {
+            const resultDiv = addResult('San Francisco Data Test', 'Loading San Francisco street data...', 'loading');
+            
+            try {
+                const dataManager = new DataManager();
+                const streets = await dataManager.loadRegionData('san-francisco');
+                
+                if (streets && streets.length > 0) {
+                    const totalMiles = streets.reduce((sum, street) => sum + street.length, 0);
+                    resultDiv.className = 'test-section success';
+                    resultDiv.innerHTML = `
+                        <h3>✅ San Francisco Data Test - SUCCESS</h3>
+                        <p><strong>Loaded ${streets.length} streets</strong></p>
+                        <p>Total miles: ${totalMiles.toFixed(2)}</p>
+                        <p>Sample streets:</p>
+                        <ul>
+                            ${streets.slice(0, 5).map(s => `<li>${s.fullName}: ${s.length.toFixed(2)} miles</li>`).join('')}
+                        </ul>
+                    `;
+                } else {
+                    throw new Error('No streets loaded');
+                }
+            } catch (error) {
+                resultDiv.className = 'test-section error';
+                resultDiv.innerHTML = `
+                    <h3>❌ San Francisco Data Test - FAILED</h3>
+                    <p>Error: ${error.message}</p>
+                `;
+            }
+        }
+        
+        async function testDataAvailability() {
+            const resultDiv = addResult('Data Availability Test', 'Checking which regions have data available...', 'loading');
+            
+            try {
+                const dataManager = new DataManager();
+                const regions = await dataManager.getAvailableRegionsWithData();
+                
+                resultDiv.className = 'test-section success';
+                resultDiv.innerHTML = `
+                    <h3>📊 Data Availability Test - COMPLETE</h3>
+                    <h4>Available Regions:</h4>
+                    <ul>
+                        ${regions.map(r => `
+                            <li>
+                                <strong>${r.name}</strong> (${r.id})
+                                - ${r.available ? '✅ Available' : '❌ Not Available'}
+                                <br><small>File: ${r.filename}</small>
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+            } catch (error) {
+                resultDiv.className = 'test-section error';
+                resultDiv.innerHTML = `
+                    <h3>❌ Data Availability Test - FAILED</h3>
+                    <p>Error: ${error.message}</p>
+                `;
+            }
+        }
+        
+        async function testRegionMapping() {
+            const resultDiv = addResult('Region Mapping Test', 'Testing region ID mapping...', 'loading');
+            
+            try {
+                const dataManager = new DataManager();
+                const testRegions = ['san-francisco', 'san_francisco_ca', 'berkeley_ca'];
+                const results = [];
+                
+                for (const region of testRegions) {
+                    try {
+                        const isValid = dataManager.isValidRegion(region);
+                        const availability = await dataManager.checkRegionAvailability(region);
+                        results.push({
+                            region,
+                            valid: isValid,
+                            available: availability,
+                            status: isValid ? (availability ? 'Ready' : 'Valid but no data') : 'Invalid'
+                        });
+                    } catch (error) {
+                        results.push({
+                            region,
+                            valid: false,
+                            available: false,
+                            status: `Error: ${error.message}`
+                        });
+                    }
+                }
+                
+                resultDiv.className = 'test-section success';
+                resultDiv.innerHTML = `
+                    <h3>🗺️ Region Mapping Test - COMPLETE</h3>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr style="background-color: #f8f9fa;">
+                            <th style="border: 1px solid #ddd; padding: 8px;">Region ID</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Valid</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Data Available</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Status</th>
+                        </tr>
+                        ${results.map(r => `
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">${r.region}</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">${r.valid ? '✅' : '❌'}</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">${r.available ? '✅' : '❌'}</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">${r.status}</td>
+                            </tr>
+                        `).join('')}
+                    </table>
+                `;
+            } catch (error) {
+                resultDiv.className = 'test-section error';
+                resultDiv.innerHTML = `
+                    <h3>❌ Region Mapping Test - FAILED</h3>
+                    <p>Error: ${error.message}</p>
+                `;
+            }
+        }
+        
+        // Auto-run basic test on page load
+        window.addEventListener('load', () => {
+            addResult('Integration Test Ready', 'Click the buttons above to test different aspects of the data loading system.', 'success');
+        });
+    </script>
+</body>
+</html> 

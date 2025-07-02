@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Street Game - Performance Test</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+        }
+        
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+        
+        .info-panel {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            max-width: 300px;
+            z-index: 1000;
+        }
+        
+        .control-group {
+            margin-bottom: 10px;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .control-group input, .control-group select {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+        }
+        
+        .test-button {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .test-button:hover {
+            background: #3730a3;
+        }
+        
+        .test-results {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .metric .value {
+            font-weight: bold;
+            color: #059669;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    
+    <!-- Performance monitoring panel -->
+    <div id="performance-panel" class="performance-panel">
+        <h4>🚀 Performance Monitor</h4>
+        <div class="performance-metric">
+            <span class="label">Total Streets:</span>
+            <span class="value" id="total-streets">0</span>
+        </div>
+        <div class="performance-metric">
+            <span class="label">Visible Streets:</span>
+            <span class="value" id="visible-streets">0</span>
+        </div>
+        <div class="performance-metric">
+            <span class="label">Render Time:</span>
+            <span class="value" id="render-time">0ms</span>
+        </div>
+        <div class="performance-metric">
+            <span class="label">Avg Render:</span>
+            <span class="value" id="avg-render-time">0ms</span>
+        </div>
+        <div class="performance-metric">
+            <span class="label">Zoom Level:</span>
+            <span class="value" id="zoom-level">12</span>
+        </div>
+        <div class="performance-controls">
+            <button class="performance-button active" id="toggle-optimizations">Optimizations ON</button>
+            <button class="performance-button" id="force-render">Force Render</button>
+        </div>
+    </div>
+    
+    <!-- Controls panel -->
+    <div class="info-panel">
+        <h3>Performance Test Controls</h3>
+        
+        <div class="control-group">
+            <label for="region-select">Test Region:</label>
+            <select id="region-select">
+                <option value="san_francisco_ca">San Francisco (1,948 streets)</option>
+                <option value="berkeley_ca">Berkeley (892 streets)</option>
+                <option value="los_angeles_ca">Los Angeles (10,142 streets)</option>
+                <option value="new_york_ny">New York (8,500+ streets)</option>
+                <option value="oakland_ca">Oakland (2,100+ streets)</option>
+                <option value="seattle_wa">Seattle (3,800+ streets)</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label for="max-streets">Max Streets per Frame:</label>
+            <input type="range" id="max-streets" min="10" max="200" value="50">
+            <span id="max-streets-value">50</span>
+        </div>
+        
+        <div class="control-group">
+            <label for="viewport-buffer">Viewport Buffer:</label>
+            <input type="range" id="viewport-buffer" min="0" max="50" value="10">
+            <span id="viewport-buffer-value">10%</span>
+        </div>
+        
+        <button class="test-button" id="load-region">Load Region</button>
+        <button class="test-button" id="stress-test">Stress Test</button>
+        <button class="test-button" id="benchmark">Benchmark</button>
+        
+        <div class="test-results" id="test-results">
+            <h4>Test Results</h4>
+            <div class="metric">
+                <span>Initial Load:</span>
+                <span class="value" id="initial-load-time">-</span>
+            </div>
+            <div class="metric">
+                <span>Pan Performance:</span>
+                <span class="value" id="pan-performance">-</span>
+            </div>
+            <div class="metric">
+                <span>Zoom Performance:</span>
+                <span class="value" id="zoom-performance">-</span>
+            </div>
+            <div class="metric">
+                <span>Memory Usage:</span>
+                <span class="value" id="memory-usage">-</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Rendering indicator -->
+    <div id="rendering-indicator" class="rendering-indicator">
+        🎨 Rendering streets...
+    </div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module">
+        import MapManager from './js/MapManager.js';
+        import DataManager from './js/DataManager.js';
+        
+        // Initialize components
+        const mapManager = new MapManager();
+        const dataManager = new DataManager();
+        
+        // DOM elements
+        const regionSelect = document.getElementById('region-select');
+        const maxStreetsSlider = document.getElementById('max-streets');
+        const maxStreetsValue = document.getElementById('max-streets-value');
+        const viewportBufferSlider = document.getElementById('viewport-buffer');
+        const viewportBufferValue = document.getElementById('viewport-buffer-value');
+        const loadRegionBtn = document.getElementById('load-region');
+        const stressTestBtn = document.getElementById('stress-test');
+        const benchmarkBtn = document.getElementById('benchmark');
+        const toggleOptimizationsBtn = document.getElementById('toggle-optimizations');
+        const forceRenderBtn = document.getElementById('force-render');
+        const renderingIndicator = document.getElementById('rendering-indicator');
+        
+        // Performance monitoring elements
+        const totalStreetsEl = document.getElementById('total-streets');
+        const visibleStreetsEl = document.getElementById('visible-streets');
+        const renderTimeEl = document.getElementById('render-time');
+        const avgRenderTimeEl = document.getElementById('avg-render-time');
+        const zoomLevelEl = document.getElementById('zoom-level');
+        
+        // Test results elements
+        const initialLoadTimeEl = document.getElementById('initial-load-time');
+        const panPerformanceEl = document.getElementById('pan-performance');
+        const zoomPerformanceEl = document.getElementById('zoom-performance');
+        const memoryUsageEl = document.getElementById('memory-usage');
+        
+        let currentRegion = 'san_francisco_ca';
+        let optimizationsEnabled = true;
+        
+        // Initialize map
+        mapManager.initializeMap('map', currentRegion);
+        
+        // Update performance monitor
+        function updatePerformanceMonitor() {
+            const stats = mapManager.getMapStats();
+            
+            totalStreetsEl.textContent = stats.totalStreets.toLocaleString();
+            visibleStreetsEl.textContent = stats.visibleStreets.toLocaleString();
+            renderTimeEl.textContent = `${stats.performance.lastRenderTime.toFixed(1)}ms`;
+            avgRenderTimeEl.textContent = `${stats.performance.averageRenderTime.toFixed(1)}ms`;
+            zoomLevelEl.textContent = stats.mapZoom?.toFixed(1) || '12';
+            
+            // Color code based on performance
+            const renderTimeMetric = renderTimeEl.parentElement;
+            if (stats.performance.lastRenderTime > 100) {
+                renderTimeMetric.className = 'performance-metric error';
+            } else if (stats.performance.lastRenderTime > 50) {
+                renderTimeMetric.className = 'performance-metric warning';
+            } else {
+                renderTimeMetric.className = 'performance-metric';
+            }
+            
+            // Update rendering indicator
+            if (stats.performance.isRendering) {
+                renderingIndicator.classList.add('active');
+            } else {
+                renderingIndicator.classList.remove('active');
+            }
+        }
+        
+        // Update controls
+        maxStreetsSlider.addEventListener('input', (e) => {
+            const value = e.target.value;
+            maxStreetsValue.textContent = value;
+            mapManager.maxStreetsPerFrame = parseInt(value);
+        });
+        
+        viewportBufferSlider.addEventListener('input', (e) => {
+            const value = e.target.value;
+            viewportBufferValue.textContent = `${value}%`;
+            mapManager.viewportBuffer = parseFloat(value) / 100;
+        });
+        
+        // Region loading
+        loadRegionBtn.addEventListener('click', async () => {
+            const region = regionSelect.value;
+            const startTime = performance.now();
+            
+            try {
+                loadRegionBtn.disabled = true;
+                loadRegionBtn.textContent = 'Loading...';
+                
+                // Set region and load data
+                mapManager.setRegion(region);
+                const streetData = await dataManager.loadStreetData(region);
+                
+                if (streetData && streetData.length > 0) {
+                    mapManager.loadStreetData(streetData);
+                    currentRegion = region;
+                    
+                    const loadTime = performance.now() - startTime;
+                    initialLoadTimeEl.textContent = `${loadTime.toFixed(1)}ms`;
+                    
+                    console.log(`Loaded ${streetData.length} streets for ${region} in ${loadTime.toFixed(1)}ms`);
+                } else {
+                    console.error('No street data loaded');
+                }
+            } catch (error) {
+                console.error('Error loading region:', error);
+            } finally {
+                loadRegionBtn.disabled = false;
+                loadRegionBtn.textContent = 'Load Region';
+            }
+        });
+        
+        // Toggle optimizations
+        toggleOptimizationsBtn.addEventListener('click', () => {
+            optimizationsEnabled = !optimizationsEnabled;
+            mapManager.setPerformanceMode(optimizationsEnabled);
+            
+            if (optimizationsEnabled) {
+                toggleOptimizationsBtn.textContent = 'Optimizations ON';
+                toggleOptimizationsBtn.classList.add('active');
+            } else {
+                toggleOptimizationsBtn.textContent = 'Optimizations OFF';
+                toggleOptimizationsBtn.classList.remove('active');
+            }
+        });
+        
+        // Force render
+        forceRenderBtn.addEventListener('click', () => {
+            mapManager.updateViewportRendering(true);
+        });
+        
+        // Stress test
+        stressTestBtn.addEventListener('click', async () => {
+            stressTestBtn.disabled = true;
+            stressTestBtn.textContent = 'Running...';
+            
+            const originalMaxStreets = mapManager.maxStreetsPerFrame;
+            
+            try {
+                // Test with different settings
+                const results = [];
+                
+                // Test 1: High street count
+                mapManager.maxStreetsPerFrame = 200;
+                const test1Start = performance.now();
+                mapManager.updateViewportRendering(true);
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                results.push(performance.now() - test1Start);
+                
+                // Test 2: Low street count
+                mapManager.maxStreetsPerFrame = 10;
+                const test2Start = performance.now();
+                mapManager.updateViewportRendering(true);
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                results.push(performance.now() - test2Start);
+                
+                // Test 3: Pan stress test
+                const panStart = performance.now();
+                const map = mapManager.map;
+                const center = map.getCenter();
+                for (let i = 0; i < 5; i++) {
+                    map.setView([center.lat + (Math.random() - 0.5) * 0.01, center.lng + (Math.random() - 0.5) * 0.01]);
+                    await new Promise(resolve => setTimeout(resolve, 200));
+                }
+                const panTime = performance.now() - panStart;
+                panPerformanceEl.textContent = `${panTime.toFixed(1)}ms`;
+                
+                console.log('Stress test results:', results);
+            } finally {
+                mapManager.maxStreetsPerFrame = originalMaxStreets;
+                stressTestBtn.disabled = false;
+                stressTestBtn.textContent = 'Stress Test';
+            }
+        });
+        
+        // Benchmark
+        benchmarkBtn.addEventListener('click', async () => {
+            benchmarkBtn.disabled = true;
+            benchmarkBtn.textContent = 'Benchmarking...';
+            
+            try {
+                const stats = mapManager.getMapStats();
+                const recommendations = mapManager.getPerformanceRecommendations();
+                
+                console.log('Performance Stats:', stats);
+                console.log('Recommendations:', recommendations);
+                
+                // Estimate memory usage (rough approximation)
+                const estimatedMemory = stats.totalStreets * 2 + stats.visibleStreets * 5; // KB
+                memoryUsageEl.textContent = `~${estimatedMemory}KB`;
+                
+                // Run zoom performance test
+                const zoomStart = performance.now();
+                const map = mapManager.map;
+                const originalZoom = map.getZoom();
+                
+                for (let i = 0; i < 3; i++) {
+                    map.setZoom(originalZoom + 1);
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                    map.setZoom(originalZoom);
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                }
+                
+                const zoomTime = performance.now() - zoomStart;
+                zoomPerformanceEl.textContent = `${zoomTime.toFixed(1)}ms`;
+                
+            } finally {
+                benchmarkBtn.disabled = false;
+                benchmarkBtn.textContent = 'Benchmark';
+            }
+        });
+        
+        // Auto-update performance monitor
+        setInterval(updatePerformanceMonitor, 500);
+        
+        // Initial load
+        setTimeout(() => {
+            loadRegionBtn.click();
+        }, 1000);
+    </script>
+</body>
+</html> 

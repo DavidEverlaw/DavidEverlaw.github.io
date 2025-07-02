@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Street Names Challenge - Discover and claim all streets in your city">
+    <title>Street Names Challenge</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#667eea">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+    
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing-page" class="landing-page">
+        <div class="landing-container">
+            <header class="landing-header">
+                <h1 class="game-title">Street Names Challenge</h1>
+                <p class="game-subtitle">Discover and claim all streets in your city</p>
+            </header>
+            
+            <main class="landing-main">
+                <div class="region-selector">
+                    <h2>Choose Your Region</h2>
+                    <div class="region-options">
+                        <!-- Featured Region -->
+                        <button class="region-btn featured" data-region="san_francisco_ca">
+                            <div class="featured-badge">
+                                <span class="badge-text">RECOMMENDED</span>
+                            </div>
+                            <span class="region-name">San Francisco</span>
+                            <span class="region-description">California, USA • Best Game Experience</span>
+                        </button>
+                        
+                        <!-- Other Regions -->
+                        <div class="other-regions">
+                            <button class="region-btn" data-region="berkeley_ca">
+                                <span class="region-name">Berkeley</span>
+                                <span class="region-description">California, USA</span>
+                            </button>
+                            <button class="region-btn" data-region="los_angeles_ca">
+                                <span class="region-name">Los Angeles</span>
+                                <span class="region-description">California, USA</span>
+                            </button>
+                            <button class="region-btn" data-region="new_york_ny">
+                                <span class="region-name">New York</span>
+                                <span class="region-description">New York, USA</span>
+                            </button>
+                            <button class="region-btn" data-region="oakland_ca">
+                                <span class="region-name">Oakland</span>
+                                <span class="region-description">California, USA</span>
+                            </button>
+                            <button class="region-btn" data-region="seattle_wa">
+                                <span class="region-name">Seattle</span>
+                                <span class="region-description">Washington, USA</span>
+                            </button>
+                        </div>
+                        <!-- Future regions will be added here -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Game Interface -->
+    <div id="game-interface" class="game-interface hidden">
+        <!-- Map Container -->
+        <div id="map-container" class="map-container">
+            <div id="map" class="map"></div>
+        </div>
+
+        <!-- Top Controls -->
+        <div class="top-controls">
+            <button id="menu-btn" class="menu-btn" aria-label="Menu">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+            
+            <div class="street-input-container">
+                <input 
+                    type="text" 
+                    id="street-input" 
+                    class="street-input" 
+                    placeholder="ENTER A STREET"
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+                <div id="input-feedback" class="input-feedback"></div>
+            </div>
+        </div>
+
+        <!-- Progress Panel -->
+        <div id="progress-panel" class="progress-panel">
+            <div class="progress-header">
+                <h3>Progress</h3>
+                <button id="close-panel" class="close-panel" aria-label="Close panel">&times;</button>
+            </div>
+            
+            <div class="progress-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Miles Discovered</span>
+                    <span id="miles-discovered" class="stat-value">0.0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Miles</span>
+                    <span id="total-miles" class="stat-value">0.0</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <span id="progress-percentage" class="progress-percentage">0%</span>
+                </div>
+            </div>
+
+            <div class="streets-list-container">
+                <div class="list-controls">
+                    <label for="sort-select">Sort by:</label>
+                    <select id="sort-select" class="sort-select">
+                        <option value="discovery">Discovery Order</option>
+                        <option value="alphabetical">Alphabetical</option>
+                        <option value="length">Length</option>
+                    </select>
+                </div>
+                
+                <div id="streets-list" class="streets-list">
+                    <!-- Discovered streets will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Modal -->
+        <div id="menu-modal" class="menu-modal hidden">
+            <div class="menu-content">
+                <div class="menu-header">
+                    <h3>Menu</h3>
+                    <button id="close-menu" class="close-menu" aria-label="Close menu">&times;</button>
+                </div>
+                <div class="menu-options">
+                    <button id="new-game" class="menu-option">New Game</button>
+                    <button id="change-region" class="menu-option">Change Region</button>
+                    <button id="how-to-play" class="menu-option">How to Play</button>
+                    <button id="statistics" class="menu-option">Statistics</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen hidden">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Loading street data...</p>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html> 
