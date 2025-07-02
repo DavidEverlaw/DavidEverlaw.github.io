@@ -1,6 +1,6 @@
 # Street Names Challenge 🗺️
 
-**Discover and claim all the streets in your city!**
+Discover and claim all the streets in your city!
 
 Street Names Challenge is an interactive geography puzzle game where players explore cities by naming streets. Type in a street name, and watch as all streets with that name light up on the map. Your goal: achieve 100% coverage by discovering every street mile in the city.
 
